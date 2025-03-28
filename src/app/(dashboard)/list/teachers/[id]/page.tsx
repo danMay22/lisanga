@@ -5,7 +5,6 @@ import BigCalendar from "@/components/BigCalendar";
 import Announcements from "@/components/Announcements";
 import Link from "next/link";
 import Performance from "@/components/Performance";
-import ProfileComponent from "../TeacherProfile";
 import { Button } from "@/components/ui/button";
 import FormModdle from "@/components/FormModdle";
 

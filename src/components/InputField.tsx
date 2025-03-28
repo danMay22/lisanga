@@ -1,6 +1,7 @@
 "use client";
 
 import { Label } from "@/components/ui/label";
+import { FieldError } from "react-hook-form";
 
 interface InputFieldProps {
   label: string;
