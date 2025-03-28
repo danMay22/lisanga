@@ -35,7 +35,7 @@ const schema = z.object({
   gender: z.enum(["male", "female"], { message: "Gender is required" }),
   img: z.instanceof(File, { message: "Image is required" }),
 });
-type Inputs = z.inter<typeof schema>;
+type Inputs = z.infer<typeof schema>;
 
 const StudentForm: React.FC<FormModdleProps> = ({ type, data }) => {
   const {
@@ -51,7 +51,7 @@ const StudentForm: React.FC<FormModdleProps> = ({ type, data }) => {
 
   return (
     <form className="flex flex-col gap-4 mt-1" onSubmit={onSubmit}>
-      <h1 classname="text-3xl font-bold">Create a new student</h1>
+      <h1 className="text-3xl font-bold">Create a new student</h1>
       <span className="text-sm text-gray-500 font-medium">
         Authentication Information
       </span>
@@ -60,7 +60,6 @@ const StudentForm: React.FC<FormModdleProps> = ({ type, data }) => {
         <InputField
           label="Username"
           name="username"
-          x
           defaultValue={data?.username}
           register={register}
           error={errors.username}
@@ -138,7 +137,7 @@ const StudentForm: React.FC<FormModdleProps> = ({ type, data }) => {
           <select
             defaultValue={data?.gender}
             className="ring-[1.5px] ring-gray-300 p-2 rounded-md text-sm w-full"
-            {...register("genders")}
+            {...register("gender")}
           >
             <option value="male">Male</option>
             <option value="female">Female</option>

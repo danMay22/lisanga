@@ -5,7 +5,6 @@ import BigCalendar from "@/components/BigCalendar";
 import Announcements from "@/components/Announcements";
 import Link from "next/link";
 import Performance from "@/components/Performance";
-import StudentProfileComponent from "../StudentProfile";
 import { Button } from "@/components/ui/button";
 
 function SingleStudentPage() {
