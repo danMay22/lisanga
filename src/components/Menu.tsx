@@ -10,19 +10,19 @@ const menuItems = [
       },
       {
         icon: "/teacher.png",
-        label: "Teachers",
+        label: "Teacher",
         href: "/list/teachers",
         visible: ["admin", "teacher"],
       },
       {
         icon: "/student.png",
-        label: "Students",
+        label: "Student",
         href: "/list/students",
         visible: ["admin", "teacher"],
       },
       {
         icon: "/parent.png",
-        label: "Parents",
+        label: "Parent",
         href: "/list/parents",
         visible: ["admin", "teacher"],
       },
@@ -40,7 +40,7 @@ const menuItems = [
       },
       {
         icon: "/lesson.png",
-        label: "Lessons",
+        label: "Lesson",
         href: "/list/lessons",
         visible: ["admin", "teacher"],
       },
@@ -52,13 +52,13 @@ const menuItems = [
       },
       {
         icon: "/assignment.png",
-        label: "Assignments",
+        label: "Assignment",
         href: "/list/assignments",
         visible: ["admin", "teacher", "student", "parent"],
       },
       {
-        icon: "/result.png",
-        label: "Results",
+        icon: "/mark.jpg",
+        label: "Marks",
         href: "/list/results",
         visible: ["admin", "teacher", "student", "parent"],
       },
@@ -89,17 +89,17 @@ const menuItems = [
     ],
   },
   {
-    title: "OTHER",
+    title: "Others",
     items: [
       {
         icon: "/profile.png",
-        label: "Profile",
+        label: "Profil",
         href: "/profile",
         visible: ["admin", "teacher", "student", "parent"],
       },
       {
         icon: "/setting.png",
-        label: "Settings",
+        label: "Paramètres",
         href: "/settings",
         visible: ["admin", "teacher", "student", "parent"],
       },
@@ -112,3 +112,46 @@ const menuItems = [
     ],
   },
 ];
+
+import { role } from "@/lib/data";
+import Image from "next/image";
+import Link from "next/link";
+
+
+function Menu() {
+  return (
+    <div className="border-b border-gray-200 dark:border-gray-600 mt-4 text-sm bg-white dark:bg-gray-900 ">
+      {menuItems.map((i) => (
+        <div key={i.title} className="flex flex-col gap-2 mt-4">
+          <span className="font-semibold text-gray-700 hidden lg:block my-4">
+            {i.title}
+          </span>
+          {i.items.map((item) => {
+            if (item.visible.includes(role)) {
+              return (
+                <Link
+                  href={item.href}
+                  key={item.label}
+                  className="flex items-center justify-center lg:justify-start gap-4 text-gray-600 md:px-2 py-2 rounded-md scale-110 transition-all duration-300 hover:scale-100"
+                >
+                  <Image
+                    src={item.icon}
+                    alt="icon"
+                    width={25}
+                    height={25}
+                    className="aspect-square rounded-lg "
+                  />
+                  <span className="hidden lg:block  text-gray-700">
+                    {item.label}
+                  </span>
+                </Link>
+              );
+            }
+          })}
+        </div>
+      ))}
+    </div>
+  );
+}
+
+export default Menu;
