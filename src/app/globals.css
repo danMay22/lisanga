@@ -2,6 +2,10 @@
 @tailwind components;
 @tailwind utilities;
 
+
+.bgColor{
+background-color: linear-gradient(90deg, rgba(9,94,97,1) 0%, rgba(238,239,241,1) 100%) !important;
+}
 .react-calendar{
   width: 100% !important;
   border: none !important;
