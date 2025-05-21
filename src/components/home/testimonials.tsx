@@ -1,11 +1,12 @@
 import React from "react";
+import Image from "next/image";
 
 export default function Testimonials() {
   return (
     <section className="bg-white dark:bg-gray-900">
     <div className="container px-6 py-10 mx-auto">
         <h1 className="text-2xl font-semibold text-center text-gray-800 capitalize lg:text-3xl dark:text-white">
-            C'est que nos eleves pensent de nous.
+            C&apos;est que nos eleves pensent de nous.
         </h1>
 
         <div className="flex justify-center mx-auto mt-6">
@@ -30,7 +31,7 @@ export default function Testimonials() {
                 </p>
 
                 <div className="flex flex-col items-center justify-center mt-8">
-                    <img className="object-cover rounded-full w-14 h-14" src="https://images.unsplash.com/photo-1499470932971-a90681ce8530?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80" alt=""/>
+                    <Image className="object-cover rounded-full w-14 h-14" src="https://images.unsplash.com/photo-1499470932971-a90681ce8530?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80" alt=""/>
 
                     <div className="mt-4 text-center">
                         <h1 className="font-semibold text-gray-800 dark:text-white">Mia Kabongo</h1>

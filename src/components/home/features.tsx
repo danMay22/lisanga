@@ -110,7 +110,7 @@ export default function Features() {
 
               <div className="mt-4 md:mx-4 md:mt-0">
                 <h1 className="text-xl font-medium text-gray-700 capitalize dark:text-white">
-                  Mesure De Securite: en cas d'incendie et autre...
+                  Mesure De Securite: en cas d&apos;incendie et autre...
                 </h1>
                 <p className="mt-3 text-gray-500 dark:text-gray-300">
                   Lorem ipsum dolor sit amet consectetur adipisicing elit.

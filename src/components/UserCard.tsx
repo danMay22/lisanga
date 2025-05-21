@@ -8,7 +8,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "./ui/
 const UserCard = ({ type }: { type: string }) => {
   return (
 
-    <Card className="odd:bg-[radial-gradient(ellipse_at_bottom,_var(--tw-gradient-stops))] from-[#48cae4] to-  even:bg-[radial-gradient(ellipse_at_bottom,_var(--tw-gradient-stops))] from-[#e0ae94] w-96 ">
+    <Card className="odd:bg-[radial-gradient(ellipse_at_bottom,_var(--tw-gradient-stops))] bg-[radial-gradient(ellipse_at_bottom,_var(--tw-gradient-stops))] from-[#e0ae94] w-96 ">
     <CardHeader className="space-y-1">
         <CardTitle className="text-2xl">Total: {type}</CardTitle>
         <CardDescription className="text-xs">Members scolaire</CardDescription>

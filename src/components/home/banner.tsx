@@ -1,5 +1,5 @@
 "use client"
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
 
 const CloseIcon = ({ className, ...props }: { className?: string }) => (
   <svg
@@ -33,7 +33,7 @@ export default function CollapsibleBanner() {
       >
         <div className="flex w-full items-center gap-x-6 bg-red-800/90 px-6 py-3 sm:px-3.5 sm:before:flex-1">
           <div className="flex items-center text-sm font-medium leading-6 text-white">
-            <p>Enregistre toi ou ton enfant maintenant pour l'annee prochaine! appuie ENREGISTRE </p>
+            <p>Enregistre toi ou ton enfant maintenant pour l&apos;annee prochaine! appuie ENREGISTRE </p>
             <a
               href="#"
               className="ml-3 flex-none rounded-lg bg-gray-900 px-3 py-1 text-xs text-white shadow-sm hover:bg-gray-900/80"

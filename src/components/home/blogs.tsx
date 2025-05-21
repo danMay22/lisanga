@@ -1,5 +1,6 @@
 import React from "react";
 import { Button } from "../ui/button";
+import Image from "next/image";
 
 export default function Blogs() {
   return (
@@ -24,7 +25,7 @@ export default function Blogs() {
 
         <div className="grid grid-cols-1 gap-8 mt-8 lg:grid-cols-2">
           <div>
-            <img
+            <Image
               className="relative z-10 object-cover w-full rounded-md h-96"
               src="https://images.unsplash.com/photo-1644018335954-ab54c83e007f?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80"
               alt=""
@@ -35,7 +36,7 @@ export default function Blogs() {
                 href="#"
                 className="font-semibold text-gray-800 hover:underline dark:text-white md:text-xl"
               >
-                QUOI, OU et COMMENT utiliser l'internet comme aide pour mes etudes.
+                QUOI, OU et COMMENT utiliser l&apos;internet comme aide pour mes etudes.
                
               </a>
 
@@ -49,7 +50,7 @@ export default function Blogs() {
           </div>
 
           <div>
-            <img
+            <Image
               className="relative z-10 object-cover w-full rounded-md h-96"
               src="https://images.unsplash.com/photo-1497032628192-86f99bcd76bc?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80"
               alt=""
@@ -67,7 +68,6 @@ export default function Blogs() {
                 Lorem ipsum dolor sit amet consectetur adipisicing elit. Iure
                 veritatis sint autem nesciunt, laudantium quia tempore delect
               </p>
-
               <p className="mt-3 text-sm text-blue-500">20 October 2019</p>
             </div>
           </div>
