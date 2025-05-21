@@ -19,8 +19,7 @@ export default function Hero() {
             />
           </div>
           <h2 className="sm:text-3xl text-4xl font-extralight tracking-tight leading-none text-white dark:text-white">
-           En route vers ton succes
-          </h2>
+           Le berceau du savoir. </h2>
           <p className="max-w-2xl mb-6 font-light text-white lg:mb-8 md:text-lg lg:text-xl dark:text-gray-400">
             Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ratione itaque adipisci voluptate ipsam error recusandae quae dolore? Adipisci, accusamus quasi. Eveniet exercitationem dolorem debitis assumenda atque asperiores neque eaque deleniti.
           </p>
