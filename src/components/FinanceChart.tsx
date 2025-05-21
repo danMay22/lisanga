@@ -1,102 +1,129 @@
-"use client"
+'use client';
 
-import { Label } from "./ui/label"
-import Image from "next/image"
-import React, { PureComponent } from 'react';
-import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
+import { RiExternalLinkLine } from '@remixicon/react';
+import { AreaChart, Card } from '@tremor/react';
 
-const data = [
-    {
-      name: 'Jan',
-      income: 6400,
-      expense: 2400,
-    
-    },
-    {
-      name: 'Feb',
-      income: 4500,
-      expense: 1200,
-    },
-    {
-      name: 'Mar',
-      income: 7800,
-      expense: 2400,
-    },
-    {
-      name: 'Apr',
-      income: 4000,
-      expense: 7500,
-    },
-    {
-      name: 'May',
-      income: 10000,
-      expense: 5700,
-    },
-    {
-      name: 'Jun',
-      income: 14000,
-      expense: 8400,
-    },
-    {
-      name: 'Jul',
-      income: 6700,
-      expense: 9040,
-    },
-    {
-        name: 'Aug',
-        income: 9000,
-        expense: 5000,
-      },
-      {
-        name: 'Sep',
-        income: 11000,
-        expense: 8120,
-      },{
-        name: 'Oct',
-        income: 1500,
-        expense: 3080,
-      },{
-        name: 'Nov',
-        income: 4500,
-        expense: 1050,
-      },{
-        name: 'Dec',
-        income: 6000,
-        expense: 3450,
-      },
-  ];
-
-function FinanceChart() {
-  return (
-    <div className="bg-white rounded-xl w-full h-full p-4">
-      {/* title */}
-      <div className="flex justify-between items-center">
-        <Label className="text-lg font-semibold">Finance</Label>
-        <Image src="/moreDark.png" alt="" width={20} height={20} />
-      </div>
-      <ResponsiveContainer width="100%" height="90%">
-        <LineChart
-          width={500}
-          height={300}
-          data={data}
-          margin={{
-            top: 5,
-            right: 30,
-            left: 20,
-            bottom: 5,
-          }}
-        >
-          <CartesianGrid strokeDasharray="3 3" stroke="#ddd"/>
-          <XAxis dataKey="name" axisLine={false} tickMargin={10}/>
-          <YAxis axisLine={false} tickMargin={20} />
-          <Tooltip />
-          <Legend align='left' verticalAlign='top' wrapperStyle={{paddingTop: "20px", paddingBottom:"40px"}}/>
-          <Line type="monotone" dataKey="income" stroke="#1e3a8a" strokeWidth={5}/>
-          <Line type="monotone" dataKey="expense" stroke="#ea580c" strokeWidth={5}/>
-        </LineChart>
-      </ResponsiveContainer>
-      </div>
-  )
+function valueFormatter(number: number) {
+  const formatter = new Intl.NumberFormat('en-US', {
+    maximumFractionDigits: 0,
+    notation: 'compact',
+    compactDisplay: 'short',
+  });
+  return formatter.format(number);
 }
 
-export default FinanceChart
+const data = [
+  {
+    date: 'Jan 23',
+    Balance: 38560,
+  },
+  {
+    date: 'Feb 23',
+    Balance: 40320,
+  },
+  {
+    date: 'Mar 23',
+    Balance: 50233,
+  },
+  {
+    date: 'Apr 23',
+    Balance: 55123,
+  },
+  {
+    date: 'May 23',
+    Balance: 56000,
+  },
+  {
+    date: 'Jun 23',
+    Balance: 100000,
+  },
+  {
+    date: 'Jul 23',
+    Balance: 85390,
+  },
+  {
+    date: 'Aug 23',
+    Balance: 80100,
+  },
+  {
+    date: 'Sep 23',
+    Balance: 75090,
+  },
+  {
+    date: 'Oct 23',
+    Balance: 71080,
+  },
+  {
+    date: 'Nov 23',
+    Balance: 68041,
+  },
+  {
+    date: 'Dec 23',
+    Balance: 60143,
+  },
+];
+
+export default function Example() {
+  return (
+    <>
+      <Card className="p-0 sm:mx-auto sm:w-full">
+        <div className="p-6">
+          <p className="text-tremor-default text-tremor-content dark:text-dark-tremor-content">
+            Balance
+          </p>
+          <p className="text-2xl font-semibold text-tremor-content-strong dark:text-dark-tremor-content-strong">
+            $60,143
+          </p>
+          <AreaChart
+            data={data}
+            index="date"
+            categories={['Balance']}
+            showLegend={false}
+            showGradient={false}
+            yAxisWidth={45}
+            valueFormatter={valueFormatter}
+            className="mt-8 hidden h-60 sm:block"
+          />
+          <AreaChart
+            data={data}
+            index="date"
+            categories={['Balance']}
+            showLegend={false}
+            showGradient={false}
+            showYAxis={false}
+            startEndOnly={true}
+            valueFormatter={valueFormatter}
+            className="mt-8 h-48 sm:hidden"
+          />
+        </div>
+        <div className="rounded-b-tremor-default border-t border-tremor-border bg-tremor-background-muted px-6 py-4 dark:border-dark-tremor-border dark:bg-dark-tremor-background">
+          <div className="flex justify-between">
+            <span className="inline-flex select-none items-center rounded-tremor-small bg-tremor-background px-2 py-1 text-tremor-label font-medium text-tremor-content-strong ring-1 ring-inset ring-tremor-ring dark:bg-dark-tremor-background-subtle dark:text-dark-tremor-content-strong dark:ring-tremor-content-emphasis">
+              Team access
+            </span>
+            <div className="flex items-center gap-2">
+              <a
+                href="#"
+                className="flex items-center gap-1.5 text-tremor-default text-tremor-brand hover:underline hover:underline-offset-4 dark:text-dark-tremor-brand"
+              >
+                View transactions
+                <RiExternalLinkLine className="size-4" aria-hidden={true} />
+              </a>
+              <span
+                className="hidden h-6 w-px bg-tremor-border dark:bg-dark-tremor-border sm:block"
+                aria-hidden={true}
+              />
+              <a
+                href="#"
+                className="hidden items-center gap-1.5 text-tremor-default text-tremor-brand hover:underline hover:underline-offset-4 dark:text-dark-tremor-brand sm:flex"
+              >
+                View statements
+                <RiExternalLinkLine className="size-4" aria-hidden={true} />
+              </a>
+            </div>
+          </div>
+        </div>
+      </Card>
+    </>
+  );
+}

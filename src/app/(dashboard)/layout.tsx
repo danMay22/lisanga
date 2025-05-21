@@ -3,6 +3,8 @@ import { Logo } from "@/components/logo";
 import Menu from "@/components/Menu";
 import Navbar from "@/components/Navbar";
 
+
+
 export default function DashboardLayout({
   children,
 }: Readonly<{
@@ -22,7 +24,6 @@ export default function DashboardLayout({
       </div>
       {/** right */}
       <div className="border-b border-gray-200 dark:border-gray-600 dark:bg-gray-900 w-[86%] md:w-[92%] lg:w-[84%] xl:w-[86%] bg-[#fafaf9] overflow-scroll flex flex-col">
-        <Navbar />
         {children}
       </div>
     </div>
