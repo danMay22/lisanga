@@ -10,7 +10,7 @@ function StudentPage() {
       {/** LEFT **/}
       <div className="w-full xl:w-2/3">
         <div className="h-full bg-white p-4 rounded-md">
-          <Label className="text-lg font-semibold">Schedule Class 4a</Label>
+          <Label className="text-lg font-semibold">Mon Horraire de classe</Label>
           <BigCalendar/>
         </div>
       </div>

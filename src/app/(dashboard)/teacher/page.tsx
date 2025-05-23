@@ -9,7 +9,7 @@ function TeacherPage() {
       {/** LEFT **/}
       <div className="w-full xl:w-2/3">
         <div className="h-full bg-white p-4 rounded-md">
-          <Label className="text-lg font-semibold">Schedule</Label>
+          <Label className="text-lg font-semibold">Horraire</Label>
           <BigCalendar/>
         </div>
       </div>

@@ -9,7 +9,7 @@ function ParentPage() {
       {/** LEFT **/}
       <div className="w-full xl:w-2/3">
         <div className="h-full bg-white p-4 rounded-md">
-          <Label className="text-lg font-semibold">Schedule (John Doe)</Label>
+          <Label className="text-lg font-semibold">Horraire pour (John Doe)</Label>
           <BigCalendar/>
         </div>
       </div>
