@@ -25,8 +25,8 @@ export function LoginForm() {
         <div className="grid gap-2">   
         
         </div>
-        <Button className="w-full" type="submit">
-        <a href={"/student"}> Connecter</a>
+        <Button className="w-full">
+         <a href={"/student"}> Connecter</a>
         </Button>
       </CardContent>
     </form>
