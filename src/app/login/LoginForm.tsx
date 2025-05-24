@@ -17,16 +17,14 @@ export function LoginForm() {
         <CardDescription className="text-xs">Bienvenue a nouveau</CardDescription>
       </CardHeader>
       <CardContent className="grid gap-4">
-       
         <div className="grid gap-2">
         <p>Ceci est notre digital <strong>Journal
         De Classe</strong>, pour eleves, profs, administrateur et meme parents.</p>
         </div>
         <div className="grid gap-2">   
-        
         </div>
         <Button className="w-full">
-        <Link href={"/admin"}> Connecter</Link>
+        <Link href="/student"> Connecter</Link>
         </Button>
       </CardContent>
     </form>
