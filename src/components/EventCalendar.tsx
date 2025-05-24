@@ -13,51 +13,39 @@ type Value = ValuePiece | [ValuePiece, ValuePiece];
 const events = [
   {
     id: 1,
-    title: "Graduation",
+    title: "Fin D'annee Scolaire: ",
     time: "09:00AM - 2:00PM",
-    description: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. ",
+    description: "2 Juin 2025, constitue la derniere journee de notre programme, cette annee et comme par coutume nous vous invintons...",
   },
   {
     id: 2,
-    title: "Parent Day",
+    title: "Parent-eleve",
     time: "10:00AM - 2:00PM",
-    description: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. ",
+    description: "Un jour de l'annee ou chaque parent peut  experimente notre structure scolaire, apprendre des nouvelles ou visiter l'enviroment de son enfant.",
   },
   {
     id: 3,
-    title: "Matric Dance",
+    title: "Journee Culturelle",
     time: "21:00PM - 00:00AM",
-    description: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. ",
+    description: "Yeaaahh!! journee de fete culturelle. ",
   },
   {
     id: 4,
-    title: "Orientation Day",
-    time: "11:00AM - 2:00PM",
-    description: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. ",
+    title: "SPORT: Interclass Foot",
+    time: "15:00PM - 18:00PM",
+    description: "Sport et match de foot. ",
   },
   {
     id: 5,
-    title: "SPORT: Interclass Foot",
-    time: "15:00PM - 18:00PM",
-    description: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. ",
+    title: "Intero-General",
+    time: "12:00PM - 2:00PM",
+    description: "23 Mars, debut des intero genereaux",
   },
   {
     id: 6,
     title: "Exams",
-    time: "12:00PM - 2:00PM",
-    description: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. ",
-  },
-  {
-    id: 7,
-    title: "Intero-General",
     time: "08:00AM - 12:00PM",
-    description: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. ",
-  },
-  {
-    id: 8,
-    title: "School Closing",
-    time: "12:00PM - 2:00PM",
-    description: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. ",
+    description: "17 May, debut des exam.",
   },
 ];
 
@@ -67,7 +55,7 @@ function EventCalendar() {
     <div className="bg-white p-4 rounded-md">
       <Calendar onChange={onChange} value={value} className="mb-4" />
       <div className="flex items-center justify-between">
-        <Label className="text-xl font-semibold my-4">Events</Label>
+        <Label className="text-xl font-semibold my-4">Evenement Scolaire: </Label>
         <Image src="/moreDark.png" alt="" width={20} height={20} />
       </div>
       <Separator />
