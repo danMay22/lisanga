@@ -35,7 +35,7 @@ export default function Blogs() {
 
             <div className="relative z-20 max-w-lg p-6 mx-auto -mt-20 bg-white rounded-md shadow dark:bg-gray-900">
               <a
-                href="/blog"
+                href="/"
                 className="font-semibold text-gray-800 hover:underline dark:text-white md:text-xl"
               >
                 QUOI, OU et COMMENT utiliser l&apos;internet comme aide pour mes etudes.
@@ -62,7 +62,7 @@ export default function Blogs() {
 
             <div className="relative z-20 max-w-lg p-6 mx-auto -mt-20 bg-white rounded-md shadow dark:bg-gray-900">
               <a
-                href="/blog"
+                href="/"
                 className="font-semibold text-gray-800 hover:underline dark:text-white md:text-xl"
               >
                Se Preparer pour mes Examen.
