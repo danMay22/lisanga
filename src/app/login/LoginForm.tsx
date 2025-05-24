@@ -19,7 +19,7 @@ export function LoginForm() {
       <CardContent className="grid gap-4">
        
         <div className="grid gap-2">
-        <p>Ceci est notre digital <strong>Journal d
+        <p>Ceci est notre digital <strong>Journal
         De Classe</strong>, pour eleves, profs, administrateur et meme parents.</p>
         </div>
         <div className="grid gap-2">   

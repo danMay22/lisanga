@@ -27,25 +27,25 @@ const events = [
     id: 3,
     title: "Journee Culturelle",
     time: "21:00PM - 00:00AM",
-    description: "Yeaaahh!! journee de fete culturelle. ",
+    description: "Yeaaahh!! journee de fete culturelle. une journee ou nos eleves expressent toute le creativite. en regard des sport, music, jubilee de vetement et MARATHON de math et physique.",
   },
   {
     id: 4,
     title: "SPORT: Interclass Foot",
     time: "15:00PM - 18:00PM",
-    description: "Sport et match de foot. ",
+    description: "Sport et match de foot. 8 classe de 3eme, 4 de 4eme, 4 de 5eme et 2 classe de 6eme jouerons 2 Match par jour, Mardi et Mercredi apres l'ecole pendant la period de OCT-FEB... La grande final just avant la period de exam et ou chaque classe qui atteint les quart-finale a une chance de gagner un prix",
   },
   {
     id: 5,
-    title: "Intero-General",
+    title: "Blogs: LIRE et APPRENDRE par Nous",
     time: "12:00PM - 2:00PM",
-    description: "23 Mars, debut des intero genereaux",
+    description: "Chaque 2 semaine un prof et une des nos chef de classe nous quelque des leurs conseille, sur la vie aujourd'hui etudes et comment s'y en sortir dans notre realite et comment en faire de son mieux pour s'y en sortir.",
   },
   {
     id: 6,
     title: "Exams",
     time: "08:00AM - 12:00PM",
-    description: "17 May, debut des exam.",
+    description: "17 May... les examens commence. nous esperons que la periode de revision a servie dans son but de vous preparez, pour la period d'exam, nous tenons a vous souhaiter une tres bonne chance. veillez trouvez l'horraire de chacun de vos exam dans la section EXAM, sur la BAR a votre gauche et emcore bonne chance, faite de votre mieux !! ",
   },
 ];
 

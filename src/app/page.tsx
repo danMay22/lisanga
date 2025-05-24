@@ -1,5 +1,6 @@
 
 
+import Footer from "@/components/Footer";
 import StaticLogoCloud from "@/components/home/animation/partner";
 import Blogs from "@/components/home/blogs";
 import Cta from "@/components/home/cta";
@@ -29,6 +30,7 @@ export default function Home() {
    <OurTeam/>
    <Blogs />
    <Promo/>
+   <Footer/>
  </div> 
   );
 }

@@ -48,7 +48,7 @@ export default function Hero() {
             Register/Enroll Now
           </Button>
         </div>
-        <div className="mt-6 lg:mt-0 lg:col-span-5 lg:flex">
+        <div className="mt-20 lg:mt-0 lg:col-span-5 lg:flex">
           {/*<ImagePic/>*/}
           <Image src={"/pexels-pixabay-256490.jpg"} alt="hero" width={500} height={500} className="object-cover object-center w-full h-full rounded-lg shadow-lg dark:shadow-gray-700" />
         </div>
