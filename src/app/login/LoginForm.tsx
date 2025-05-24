@@ -26,7 +26,7 @@ export function LoginForm() {
         
         </div>
         <Button className="w-full">
-        <Link href={"/student"}> Connecter</Link>
+        <Link href={"/admin"}> Connecter</Link>
         </Button>
       </CardContent>
     </form>
