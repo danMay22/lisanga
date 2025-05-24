@@ -24,7 +24,7 @@ function Announcements() {
         </div>
       </div>
       <div className="flex flex-col gap-4 mt-2">
-        <div className="border border-s-orange-800/75 transition delay-150 duration-300 ease-in-out hover:-translate-y-1 hover:scale-110 hover:bg-transparent rounded-md p-4 border-l-8 sm:py-8 dark:border-violet-600 dark:bg-blue-50 dark:text-gray-800">
+        <div className="border border-s-[radial-gradient(ellipse_at_bottom,_var(--tw-gradient-stops))] from-[#48cae4] to-[#023e8a]  transition delay-150 duration-300 ease-in-out hover:-translate-y-1 hover:scale-110 hover:bg-transparent rounded-md p-4 border-l-8 sm:py-8 dark:border-violet-600 dark:bg-blue-50 dark:text-gray-800">
           <div className="flex items-center justify-between">
             <h2 className="font-medium">
               Livre a vendre
@@ -39,7 +39,7 @@ function Announcements() {
         </div>
       </div>
       <div className="flex flex-col gap-4 mt-2">
-        <div className="border border-s-green-800/75 transition delay-150 duration-300 ease-in-out hover:-translate-y-1 hover:scale-110 hover:bg-transparent rounded-md p-4 border-l-8 sm:py-8 dark:border-violet-600 dark:bg-blue-50 dark:text-gray-800">
+        <div className="border border-s-orange-800/75 transition delay-150 duration-300 ease-in-out hover:-translate-y-1 hover:scale-110 hover:bg-transparent rounded-md p-4 border-l-8 sm:py-8 dark:border-violet-600 dark:bg-blue-50 dark:text-gray-800">
           <div className="flex items-center justify-between">
             <h2 className="font-medium">
               Gardez la salle d&apos;informatique PROPRE!!!
@@ -69,7 +69,7 @@ function Announcements() {
         </div>
       </div>
       <div className="flex flex-col gap-4 mt-2">
-        <div className="border border-s-orange-800/75 transition delay-150 duration-300 ease-in-out hover:-translate-y-1 hover:scale-110 hover:bg-transparent rounded-md p-4 border-l-8 sm:py-8 dark:border-violet-600 dark:bg-blue-50 dark:text-gray-800">
+        <div className="border border-s-[radial-gradient(ellipse_at_bottom,_var(--tw-gradient-stops))] from-[#48cae4] to-[#023e8a]  transition delay-150 duration-300 ease-in-out hover:-translate-y-1 hover:scale-110 hover:bg-transparent rounded-md p-4 border-l-8 sm:py-8 dark:border-violet-600 dark:bg-blue-50 dark:text-gray-800">
           <div className="flex items-center justify-between">
             <h2 className="font-medium">
             Noel !!!!!

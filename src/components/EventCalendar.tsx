@@ -62,7 +62,7 @@ function EventCalendar() {
       <div className="flex flex-col gap-4 p-4 mt-4">
         {events.map((event) => (
           <div
-            className="rounded-tremor-default border-2 border-t-dashed border-gray-300 shadow-sm p-6 dark:border-dark-tremor-content-subtle sm:mx-auto sm:max-w-lg border-t-4 odd:border-t-lamaRed even:border-t-lamaYellow"
+            className="rounded-tremor-default border-2 border-t-dashed border-gray-300 shadow-sm p-6 dark:border-dark-tremor-content-subtle sm:mx-auto sm:max-w-lg border-t-4 odd:border-t-[radial-gradient(ellipse_at_bottom,_var(--tw-gradient-stops))] from-[#48cae4] to-[#023e8a]  even:border-t-lamaYellow"
             key={event.id}
           >
             <div className="flex items-center justify-between">
