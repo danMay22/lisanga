@@ -3,6 +3,21 @@
 @tailwind utilities;
 
 
+@layer utilities {
+  .h-minus-80 {
+    height: calc(100vh - 80px);
+  }
+
+  .h-minus-135 {
+    height: calc(100vh - 135px);
+  }
+
+  .h-minus-230 {
+    height: calc(100vh - 230px);
+  }
+}
+
+
 .bgColor{
 background-color: linear-gradient(90deg, rgba(9,94,97,1) 0%, rgba(238,239,241,1) 100%) !important;
 }
