@@ -22,7 +22,7 @@ export const Header= ({ className }: HeaderProps) => {
       <div className='justify-between max-w-screen-lg mx-auto px-4 sm:px-6 lg:px-8 mr-4 flex items-center gap-4'>
       <UserMenu/>
       <Button>
-              <Link href={"/login"}>Se Connecter / Dec</Link>
+       <Link href={"/login"}>Se Connecter / Dec</Link>
     </Button>
       <div className='border-l pl-4 dark:border-gray-800'>
      
