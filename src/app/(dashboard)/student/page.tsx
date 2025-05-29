@@ -10,12 +10,11 @@ function StudentPage() {
       {/** LEFT **/}
       <div className="w-full xl:w-2/3">
         <div className="h-full bg-white p-4 rounded-md">
-          <Label className="text-lg font-semibold">Mon Horraire de classe</Label>
+          <Label className="text-lg font-semibold">My weekly schedule: </Label>
           <BigCalendar/>
         </div>
       </div>
       {/** RIGHT **/}
-
       <div className="w-full xl:w-1/3 flex flex-col gap-8">
         <EventCalendar />
         <Announcements />

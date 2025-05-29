@@ -15,7 +15,7 @@ export default function DashboardLayout({
       {/** left */}
       <div className="w-[14%] md:w-[8%] lg:w-[16%] xl:w-[-14%] p-4">
         <Link
-          href="/"
+          href="https://next-dashboard-ui-rouge.vercel.app/student"
           className="flex items-center justify-center lg:justify-start gap-2"
         >
           <Logo />

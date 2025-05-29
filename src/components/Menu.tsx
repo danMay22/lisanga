@@ -4,91 +4,91 @@ const menuItems = [
     items: [
       {
         icon: "/home.png",
-        label: "Acceuil",
-        href: "/",
+        label: "home",
+        href: "https://next-dashboard-ui-rouge.vercel.app/student",
         visible: ["admin", "teacher", "student", "parent"],
       },
       {
         icon: "/teacher.png",
-        label: "Profs",
+        label: "teacher",
         href: "/list/teachers",
         visible: ["admin", "teacher"],
       },
       {
         icon: "/student.png",
-        label: "Eleves",
+        label: "students",
         href: "/list/students",
         visible: ["admin", "teacher"],
       },
       {
         icon: "/parent.png",
-        label: "Parents",
+        label: "parents",
         href: "/list/parents",
         visible: ["admin", "teacher"],
       },
       {
         icon: "/subject.png",
-        label: "Cours",
+        label: "subject",
         href: "/list/subjects",
         visible: ["admin"],
       },
       {
         icon: "/class.png",
-        label: "Salle de Classe",
+        label: "class",
         href: "/list/classes",
         visible: ["admin", "teacher"],
       },
       {
         icon: "/lesson.png",
-        label: "Cours de Ratrapage",
+        label: "lessons",
         href: "/list/lessons",
         visible: ["admin", "teacher"],
       },
       {
         icon: "/exam.png",
-        label: "Examens",
+        label: "Exams",
         href: "/list/exams",
         visible: ["admin", "teacher", "student", "parent"],
       },
       {
         icon: "/assignment.png",
-        label: "Devoirs",
+        label: "assignments",
         href: "/list/assignments",
         visible: ["admin", "teacher", "student", "parent"],
       },
       {
         icon: "/mark.jpg",
-        label: "Points",
+        label: "marks",
         href: "/list/results",
         visible: ["admin", "teacher", "student", "parent"],
       },
-      {
+      /*{
         icon: "/attendance.png",
         label: "Presence",
         href: "/list/attendance",
         visible: ["admin", "teacher", "student", "parent"],
-      },
+      },*/
       {
         icon: "/calendar.png",
-        label: "Evenments",
+        label: "Events",
         href: "/list/events",
         visible: ["admin", "teacher", "student", "parent"],
       },
-      {
+      /*{
         icon: "/message.png",
         label: "Messages",
         href: "/list/messages",
         visible: ["admin", "teacher", "student", "parent"],
-      },
+      },*/
       {
         icon: "/announcement.png",
-        label: "Announcements",
+        label: "announcements",
         href: "/list/announcements",
         visible: ["admin", "teacher", "student", "parent"],
       },
     ],
   },
-  {
+  /*{
     title: "Autre...",
     items: [
       {
@@ -110,7 +110,7 @@ const menuItems = [
         visible: ["admin", "teacher", "student", "parent"],
       },
     ],
-  },
+  },*/
 ];
 
 import { role } from "@/lib/data";

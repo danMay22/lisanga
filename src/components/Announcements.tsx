@@ -5,7 +5,7 @@ function Announcements() {
   return (
     <div className="bg-white p-4 rounded-md">
       <div className="flex items-center justify-between">
-        <Label className="text-xl font-semibold">Communiquees: </Label>
+        <Label className="text-xl font-semibold">Annoucements: </Label>
         <span className="text-xs text-gray-400">View All</span>
       </div>
       <div className="flex flex-col gap-4 mt-2">

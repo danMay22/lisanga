@@ -25,7 +25,6 @@ export const Header= ({ className }: HeaderProps) => {
        <Link href={"/student"}>Se Connecter / Dec</Link>
     </Button>
       <div className='border-l pl-4 dark:border-gray-800'>
-     
       <ModeToggle/>
       </div>
       </div>

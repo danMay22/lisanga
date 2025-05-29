@@ -55,7 +55,7 @@ function EventCalendar() {
     <div className="bg-white p-4 rounded-md">
       <Calendar onChange={onChange} value={value} className="mb-4" />
       <div className="flex items-center justify-between">
-        <Label className="text-xl font-semibold my-4">Evenement Scolaire: </Label>
+        <Label className="text-xl font-semibold my-4">School Events: </Label>
         <Image src="/moreDark.png" alt="" width={20} height={20} />
       </div>
       <Separator />
