@@ -5,6 +5,7 @@ import React from "react";
 import { Button } from "../ui/button";
 import TextAnimate from "./animation/animation-docs";
 import Image from "next/image";
+import Link from "next/link";
 
 export default function Hero() {
   return (
@@ -26,8 +27,9 @@ export default function Hero() {
           <Button
             variant="ghost"
             className="inline-flex items-center justify-center px-5 py-3 mr-3 text-base font-medium  rounded-lg  hover:cursor-pointer"
+            asChild
           >
-            Read more
+            <Link href="/blog">Read more</Link>
             <svg
               className="w-5 h-5 ml-2 -mr-1"
               fill="currentColor"

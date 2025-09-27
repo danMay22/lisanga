@@ -6,6 +6,8 @@ import "react-calendar/dist/Calendar.css";
 import { Separator } from "./ui/separator";
 import { Label } from "./ui/label";
 import Image from "next/image";
+import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "./ui/dropdown-menu";
+import { MoreHorizontal, Edit, Trash2 } from "lucide-react";
 
 type ValuePiece = Date | null;
 type Value = ValuePiece | [ValuePiece, ValuePiece];
@@ -13,7 +15,7 @@ type Value = ValuePiece | [ValuePiece, ValuePiece];
 const events = [
   {
     id: 1,
-    title: "Fin D'annee Scolaire: ",
+    title: "Fin D'annee Scolaire",
     time: "09:00AM - 2:00PM",
     description: "2 Juin 2025, constitue la derniere journee de notre programme, cette annee et comme par coutume nous vous invintons...",
   },
@@ -21,7 +23,7 @@ const events = [
     id: 2,
     title: "Parent-eleve",
     time: "10:00AM - 2:00PM",
-    description: "Un jour de l'annee ou chaque parent peut  experimente notre structure scolaire, apprendre des nouvelles ou visiter l'enviroment de son enfant.",
+    description: "Un jour de l'annee ou chaque parent peut experimente notre structure scolaire, apprendre des nouvelles ou visiter l'enviroment de son enfant.",
   },
   {
     id: 3,
@@ -33,48 +35,72 @@ const events = [
     id: 4,
     title: "SPORT: Interclass Foot",
     time: "15:00PM - 18:00PM",
-    description: "Sport et match de foot. 8 classe de 3eme, 4 de 4eme, 4 de 5eme et 2 classe de 6eme jouerons 2 Match par jour, Mardi et Mercredi apres l'ecole pendant la period de OCT-FEB... La grande final just avant la period de exam et ou chaque classe qui atteint les quart-finale a une chance de gagner un prix",
+    description: "Sport et match de foot. 8 classe de 3eme, 4 de 4eme, 4 de 5eme et 2 classe de 6eme jouerons 2 Match par jour, Mardi et Mercredi apres l'ecole pendant la period de OCT-FEB...",
   },
   {
     id: 5,
     title: "Blogs: LIRE et APPRENDRE par Nous",
     time: "12:00PM - 2:00PM",
-    description: "Chaque 2 semaine un prof et une des nos chef de classe nous quelque des leurs conseille, sur la vie aujourd'hui etudes et comment s'y en sortir dans notre realite et comment en faire de son mieux pour s'y en sortir.",
+    description: "Chaque 2 semaine un prof et une des nos chef de classe nous quelque des leurs conseille, sur la vie aujourd'hui etudes et comment s'y en sortir dans notre realite.",
   },
   {
     id: 6,
     title: "Exams",
     time: "08:00AM - 12:00PM",
-    description: "17 May... les examens commence. nous esperons que la periode de revision a servie dans son but de vous preparez, pour la period d'exam, nous tenons a vous souhaiter une tres bonne chance. veillez trouvez l'horraire de chacun de vos exam dans la section EXAM, sur la BAR a votre gauche et emcore bonne chance, faite de votre mieux !! ",
+    description: "17 May... les examens commence. nous esperons que la periode de revision a servie dans son but de vous preparez, pour la period d'exam, nous tenons a vous souhaiter une tres bonne chance.",
   },
 ];
 
 function EventCalendar() {
   const [value, onChange] = useState<Value>(new Date());
+  
+  const handleEdit = (id: number) => {
+    console.log("Edit event:", id);
+  };
+  
+  const handleDelete = (id: number) => {
+    console.log("Delete event:", id);
+  };
+
   return (
     <div className="bg-white p-4 rounded-md">
       <Calendar onChange={onChange} value={value} className="mb-4" />
-      <div className="flex items-center justify-between">
-        <Label className="text-xl font-semibold my-4">School Events: </Label>
-        <Image src="/moreDark.png" alt="" width={20} height={20} />
-      </div>
-      <Separator />
+
       <div className="flex flex-col gap-4 p-4 mt-4">
         {events.map((event) => (
           <div
-            className="rounded-tremor-default border-2 border-t-dashed border-gray-300 shadow-sm p-6 dark:border-dark-tremor-content-subtle sm:mx-auto sm:max-w-lg border-t-4 odd:border-t-[radial-gradient(ellipse_at_bottom,_var(--tw-gradient-stops))] from-[#48cae4] to-[#023e8a]  even:border-t-lamaYellow"
+            className="block p-6 border border-gray-200 rounded-lg shadow-sm hover:bg-gray-50 transition-colors"
             key={event.id}
           >
-            <div className="flex items-center justify-between">
-              <h2 className="font-semibold text-gray-700">{event.title}</h2>
-              <span className="text-gray-400 text-xs">{event.time}</span>
-              <p className="text-tremor-metric font-semibold text-tremor-content-strong dark:text-dark-tremor-content-strong"></p>
+            <div className="flex items-start justify-between mb-2">
+              <h5 className="text-xl font-bold tracking-tight text-gray-900">{event.title}</h5>
+              <DropdownMenu>
+                <DropdownMenuTrigger className="p-1 hover:bg-gray-100 rounded">
+                  <MoreHorizontal className="h-4 w-4" />
+                </DropdownMenuTrigger>
+                <DropdownMenuContent align="end">
+                  <DropdownMenuItem onClick={() => handleEdit(event.id)}>
+                    <Edit className="mr-2 h-4 w-4" />
+                    Edit
+                  </DropdownMenuItem>
+                  <DropdownMenuItem onClick={() => handleDelete(event.id)} className="text-red-600">
+                    <Trash2 className="mr-2 h-4 w-4" />
+                    Delete
+                  </DropdownMenuItem>
+                </DropdownMenuContent>
+              </DropdownMenu>
             </div>
-            <span className="text-tremor-default text-tremor-content dark:text-dark-tremor-content">
-              {event.description}
-            </span>
+            <div className="text-sm text-gray-500 mb-2">{event.time}</div>
+            <p className="font-normal text-gray-700">{event.description}</p>
           </div>
         ))}
+      </div>
+      <div className="mt-4">
+        <input
+          type="text"
+          placeholder="Report an issue or leave a message..."
+          className="w-full p-3 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+        />
       </div>
     </div>
   );

@@ -9,32 +9,36 @@ import {
   DropdownMenuTrigger,
 } from "./ui/dropdown-menu";
 import { Button } from "./ui/button";
-import { CircleUser, CreditCard, LogOut, Plus, UserIcon } from "lucide-react";
+import { CircleUser, LogOut, UserIcon } from "lucide-react";
 import Link from "next/link";
 
+interface UserMenuProps {
+  onSignOut?: () => void;
+}
 
-export default function UserMenu() {
-    const handleSignOut = async () => {
-       console.log("signing out")
-    };
+export default function UserMenu({ onSignOut }: UserMenuProps) {
+  const handleSignOut = async () => {
+    onSignOut?.();
+  };
+  
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
         <Button
           variant="ghost"
           size="icon"
-          className="relative h-10 w-9 rounded-full border bg-background"
+          className="relative h-9 w-9 rounded-full border bg-white"
         >
           <CircleUser className="h-5 w-5" />
-          <span className="sr-only">Open User menu/Ouvrir user menu</span>
+          <span className="sr-only">Open user menu</span>
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent className="w-56" align="end">
         <DropdownMenuLabel className="font-normal">
           <div className="flex flex-col space-y-1">
             <p className="text-sm font-medium leading-none">John Doe</p>
-            <p className="text-sm leading-none text-muted-foreground">
-              John.doe@example.com
+            <p className="text-xs leading-none text-gray-500">
+              john.doe@example.com
             </p>
           </div>
         </DropdownMenuLabel>
@@ -47,27 +51,12 @@ export default function UserMenu() {
               <span>Profile</span>
             </Link>
           </DropdownMenuItem>
-
-        <DropdownMenuItem asChild>
-            <Link href="/profile" className="w-full cursor-pointer">
-              <CreditCard className="mr-2 h-4 w-4" />
-              <span>Projects</span>
-            </Link>
-          </DropdownMenuItem>
           <DropdownMenuSeparator />
-          <DropdownMenuItem asChild>
-            <Link href="/profile" className="w-full cursor-pointer">
-              <Plus className="mr-2 h-4 w-4" />
-              <span>New/Nouveau Project</span>
-            </Link>
-          </DropdownMenuItem>
-          <DropdownMenuSeparator />
-
           <DropdownMenuItem
-            className="cursor-pointer text-red-600 dartk:text-red-400 focus:text-red-600 dark:focus:text-red-400"
+            className="cursor-pointer text-red-600 focus:text-red-600"
             onSelect={handleSignOut}>
                 <LogOut className="mr-2 h-4 w-4" />
-                <span>Sign Out</span>
+                <span>Deconnecter</span>
         </DropdownMenuItem>
         </DropdownMenuGroup>
       </DropdownMenuContent>

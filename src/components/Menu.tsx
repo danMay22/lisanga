@@ -132,7 +132,7 @@ function Menu() {
                 <Link
                   href={item.href}
                   key={item.label}
-                  className="flex items-center justify-center lg:justify-start gap-4 text-gray-600 md:px-2 py-2 rounded-md scale-110 transition-all duration-300 hover:scale-100"
+                  className="flex items-center justify-center lg:justify-start gap-4 text-gray-600 md:px-2 py-2 rounded-md scale-110 transition-all duration-300 hover:scale-100 relative group"
                 >
                   <Image
                     src={item.icon}
@@ -142,6 +142,9 @@ function Menu() {
                     className="aspect-square rounded-lg "
                   />
                   <span className="hidden lg:block  text-gray-700">
+                    {item.label}
+                  </span>
+                  <span className="absolute left-12 bg-gray-800 text-white text-xs rounded px-2 py-1 opacity-0 group-hover:opacity-100 transition-opacity lg:hidden whitespace-nowrap z-10">
                     {item.label}
                   </span>
                 </Link>

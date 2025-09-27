@@ -1,9 +1,17 @@
-import React from 'react'
+import { Header } from '@/components/home/Header';
+import BlogSection from '@/components/blog/BlogSection';
+import ExpertiseSection from '@/components/blog/ExpertiseSection';
+import ArticlesSection from '@/components/blog/ArticlesSection';
 
-export default function page() {
+export default function BlogPage() {
   return (
     <div>
-      blogs
+      <Header />
+      <div className="pt-20">
+        <BlogSection />
+        <ExpertiseSection />
+        <ArticlesSection />
+      </div>
     </div>
-  )
+  );
 }

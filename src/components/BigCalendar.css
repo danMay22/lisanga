@@ -1,0 +1,20 @@
+.rbc-event {
+  background-color: #3b82f6 !important;
+  border: none !important;
+  color: white !important;
+  font-weight: 500 !important;
+  padding: 2px 5px !important;
+  border-radius: 4px !important;
+}
+
+.rbc-event:focus {
+  outline: 2px solid #1d4ed8 !important;
+}
+
+.rbc-selected {
+  background-color: #1d4ed8 !important;
+}
+
+.rbc-event-content {
+  font-size: 12px !important;
+}
