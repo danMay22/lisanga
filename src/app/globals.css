@@ -24,7 +24,7 @@ background-color: linear-gradient(90deg, rgba(9,94,97,1) 0%, rgba(238,239,241,1)
 .react-calendar{
   width: 100% !important;
   border: none !important;
- font-family: var(--font-poppins) !important;
+ font-family: system-ui, -apple-system, sans-serif !important;
 }
 .react-calendar__navigation__label__labelText{
   font-weight: 600;
@@ -194,7 +194,7 @@ font-size: 14px;
   }
 }
 .poppins {
-  font-family: var(--font-poppins);
+  font-family: system-ui, -apple-system, sans-serif;
 }
 .--my-border{
   background: rgb(131, 58, 180);
