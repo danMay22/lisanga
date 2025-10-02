@@ -1,3 +1,5 @@
+'use client';
+
 import React from "react";
 import {
   DropdownMenu,
@@ -12,13 +14,10 @@ import { Button } from "./ui/button";
 import { CircleUser, LogOut, UserIcon } from "lucide-react";
 import Link from "next/link";
 
-interface UserMenuProps {
-  onSignOut?: () => void;
-}
-
-export default function UserMenu({ onSignOut }: UserMenuProps) {
+export default function UserMenu() {
   const handleSignOut = async () => {
-    onSignOut?.();
+    localStorage.removeItem('isLoggedIn');
+    window.location.href = '/';
   };
   
   return (

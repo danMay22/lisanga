@@ -1,6 +1,8 @@
+import React from 'react';
 import { Header } from '@/components/home/Header';
 
-export default function ExpertisePage({ params }: { params: { id: string } }) {
+export default function ExpertisePage({ params }: { params: Promise<{ id: string }> }) {
+  const resolvedParams = React.use(params);
   return (
     <div>
       <Header />

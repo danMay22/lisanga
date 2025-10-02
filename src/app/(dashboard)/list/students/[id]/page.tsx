@@ -4,10 +4,27 @@ import Image from "next/image";
 import BigCalendar from "@/components/BigCalendar";
 import Announcements from "@/components/Announcements";
 import Link from "next/link";
-import Performance from "@/components/Performance";
+import StudentPerformance from "@/components/StudentPerformance";
 import { Button } from "@/components/ui/button";
+import { studentsData, attendanceData } from "@/lib/data";
 
-function SingleStudentPage() {
+function SingleStudentPage({ params }: { params: Promise<{ id: string }> }) {
+  const resolvedParams = React.use(params);
+  const studentId = parseInt(resolvedParams.id);
+  const student = studentsData.find(s => s.id === studentId);
+  
+  if (!student) {
+    return <div>Student not found</div>;
+  }
+
+  // Calculate individual attendance
+  const studentAttendance = attendanceData.filter(record => 
+    record.present.includes(studentId) || record.absent.includes(studentId)
+  );
+  const presentCount = attendanceData.filter(record => record.present.includes(studentId)).length;
+  const attendancePercentage = studentAttendance.length > 0 
+    ? Math.round((presentCount / studentAttendance.length) * 100) 
+    : 0;
   return (
     <div className="flex-1 p-4 flex flex-col gap-4 xl:flex-row ">
       {/*LEFT*/}
@@ -19,19 +36,19 @@ function SingleStudentPage() {
       <a href="#">
         <Image
           className="w-full rounded-lg sm:rounded-none sm:rounded-l-lg"
-          src="https://images.pexels.com/photos/1187765/pexels-photo-1187765.jpeg?auto=compress&cs=tinysrgb&w=1200"
-          alt=""
+          src={student.photo}
+          alt={`${student.name} Avatar`}
           width={144}
           height={144}
         />
       </a>
       <div className="p-5">
       <h1 className="text-xl font-semibold tracking-tight text-gray-900 dark:text-white">
-          <a href="#">Neil Kamo</a>
+          <a href="#">{student.name}</a>
         </h1>
         <p className="text-sm mt-3 mb-4 font-light text-gray-500 dark:text-gray-400">
-         Neil, one of our best and brightest Lorem ipsum dolor sit amet consectetur inventore aliquam debitis recusandae quibusdam reiciendis repellendus.
-          platform and brand.
+         {student.name} is a dedicated student in grade {student.grade}, class {student.class}. 
+         Excelling in academics and showing great potential for future success.
         </p>
 
           <ul className="flex items-center justify-between gap-2 flex-wrap text-xs font-medium">
@@ -95,7 +112,7 @@ function SingleStudentPage() {
                 </svg>
               </a>
               <span className="flex items-center justify-between gap-2 flex-wrap  font-medium">
-                user@gmail.com
+                {student.email}
               </span>
             </li>
             <li className="w-full md:w-1/3 lg:w-full 2xl:w-1/3 flex items-center gap-2">
@@ -115,7 +132,7 @@ function SingleStudentPage() {
                 </svg>{" "}
               </a>
               <span className="flex items-center justify-between gap-2 flex-wrap font-medium">
-                +27 98765421
+                {student.phone}
               </span>
             </li>
           </ul>
@@ -133,7 +150,7 @@ function SingleStudentPage() {
                 className="w-6 h-6 "
               />
               <div className="">
-                <h1 className="text-xl font-semibold">90%</h1>
+                <h1 className="text-xl font-semibold">{attendancePercentage}%</h1>
                 <span className="text-sm text-gray-400">Attendance</span>
               </div>
             </div>
@@ -147,7 +164,7 @@ function SingleStudentPage() {
                 className="w-6 h-6 "
               />
               <div className="">
-                <h1 className="text-xl font-semibold">5th</h1>
+                <h1 className="text-xl font-semibold">{student.grade}th</h1>
                 <span className="text-sm text-gray-400">Grade</span>
               </div>
             </div>
@@ -177,7 +194,7 @@ function SingleStudentPage() {
                 className="w-6 h-6 "
               />
               <div className="">
-                <h1 className="text-xl font-semibold">4A</h1>
+                <h1 className="text-xl font-semibold">{student.class}</h1>
                 <span className="text-sm text-gray-400">Class</span>
               </div>
             </div>
@@ -226,7 +243,11 @@ function SingleStudentPage() {
             </Link>
           </div>
         </div>
-        <Performance />
+        <StudentPerformance 
+          studentId={studentId} 
+          studentName={student.name} 
+          className={student.class} 
+        />
         <Announcements />
       </div>
     </div>

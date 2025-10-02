@@ -30,7 +30,7 @@ export function LoginForm() {
     
     setTimeout(() => {
       localStorage.setItem('isLoggedIn', 'true');
-      window.location.href = '/student';
+      router.push('/student');
       setIsLoading(false);
     }, 500);
   };

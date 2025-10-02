@@ -5,7 +5,7 @@ const menuItems = [
       {
         icon: "/home.png",
         label: "home",
-        href: "https://next-dashboard-ui-rouge.vercel.app/student",
+        href: role === "admin" ? "/admin" : role === "teacher" ? "/teacher" : role === "student" ? "/student" : role === "parent" ? "/parent" : "/",
         visible: ["admin", "teacher", "student", "parent"],
       },
       {
@@ -123,9 +123,6 @@ function Menu() {
     <div className="border-b border-[radial-gradient(ellipse_at_bottom,_var(--tw-gradient-stops))] from-[#48cae4] to-[#023e8a]  dark:border-gray-600 mt-4 text-sm bg-white dark:bg-gray-900 ">
       {menuItems.map((i) => (
         <div key={i.title} className="flex flex-col gap-2 mt-4 mb-8">
-          <span className="font-semibold text-gray-700 hidden lg:block my-4">
-            {i.title}
-          </span>
           {i.items.map((item) => {
             if (item.visible.includes(role)) {
               return (
@@ -141,7 +138,7 @@ function Menu() {
                     height={25}
                     className="aspect-square rounded-lg "
                   />
-                  <span className="hidden lg:block  text-gray-700">
+                  <span className="hidden lg:block text-gray-700 font-bold capitalize">
                     {item.label}
                   </span>
                   <span className="absolute left-12 bg-gray-800 text-white text-xs rounded px-2 py-1 opacity-0 group-hover:opacity-100 transition-opacity lg:hidden whitespace-nowrap z-10">

@@ -50,127 +50,154 @@ const TeacherForm: React.FC<FormModdleProps> = ({ type, data }) => {
   });
 
   return (
-    <form className="flex flex-col gap-4 mt-1" onSubmit={onSubmit}>
-      <h1 className="text-3xl font-bold">Create a new teacher</h1>
-      <span className="text-sm text-gray-500 font-medium">
-        Authentication Information
-      </span>
-      <Separator />
-      <div className="flex justify-between flex-wrap gap-4">
-        <InputField
-          label="Username"
-          name="username"
-          defaultValue={data?.username}
-          register={register}
-          error={errors.username}
-        />
-
-        <InputField
-          label="Email"
-          name="email"
-          type="email"
-          defaultValue={data?.email}
-          register={register}
-          error={errors.email}
-        />
-
-        <InputField
-          label="Passowrd"
-          name="password"
-          type="password"
-          defaultValue={data?.password}
-          register={register}
-          error={errors.password}
-        />
-      </div>
-      <span className="text-sm text-gray-500 font-medium">
-        Personal Information
-      </span>
-      <Separator />
-      <div className="flex justify-between flex-wrap gap-4">
-        <InputField
-          label="First Name"
-          name="firstName"
-          defaultValue={data?.firstName}
-          register={register}
-          error={errors.firstName}
-        />
-        <InputField
-          label="Last Name"
-          name="lastName"
-          defaultValue={data?.lastName}
-          register={register}
-          error={errors.lastName}
-        />
-        <InputField
-          label="Phone"
-          name="phone"
-          defaultValue={data?.phone}
-          register={register}
-          error={errors.phone}
-        />
-        <InputField
-          label="Address"
-          name="address"
-          defaultValue={data?.address}
-          register={register}
-          error={errors.address}
-        />
-        <InputField
-          label="Blood Type"
-          name="bloodType"
-          defaultValue={data?.bloodType}
-          register={register}
-          error={errors.bloodType}
-        />
-        <InputField
-          label="Birthday"
-          name="birthday"
-          defaultValue={data?.birthday}
-          register={register}
-          error={errors.birthday}
-          type="date"
-        />
-
-        <div className="flex flex-col gap-4 w-full md:w-1/4">
-          <Label className="text-sm text-gray-500">Gender</Label>
-          <select
-            defaultValue={data?.gender}
-            className="ring-[1.5px] ring-gray-300 p-2 rounded-md text-sm w-full"
-            {...register("gender")}
-          >
-            <option value="male">Male</option>
-            <option value="female">Female</option>
-          </select>
-          {errors.gender?.message && (
-            <p className="text-xs text-red-600">
-              {errors.gender.message.toString()}
-            </p>
-          )}
+    <div className="max-h-[80vh] overflow-y-auto">
+      <form className="flex flex-col gap-6 p-6" onSubmit={onSubmit}>
+        <div className="text-center border-b pb-4">
+          <h1 className="text-2xl font-bold text-gray-900">
+            {type === "create" ? "Create New Teacher" : "Update Teacher"}
+          </h1>
+          <p className="text-sm text-gray-500 mt-1">
+            Fill in the information below to {type === "create" ? "add a new" : "update the"} teacher
+          </p>
         </div>
-        <div className="mt-4 mb-6flex flex-col gap-4 w-full md:w-1/4 justify-center">
-          <Label
-            className="text-sm text-gray-500 flex items-center gap-2 cursor-pointer"
-            htmlFor="img"
-          >
-            <Image src="/upload.png" alt="" width={28} height={28} />
-            <span className="">Upload a photo</span>
-          </Label>
-          <input type="file" id="img" {...register("img")} className="hidden" />
-          {errors.img?.message && (
-            <p className="text-xs text-red-600">
-              {errors.img.message.toString()}
-            </p>
-          )}
+
+        <div className="space-y-6">
+          <div>
+            <h3 className="text-lg font-semibold text-gray-800 mb-4">Authentication Information</h3>
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+              <InputField
+                label="Username"
+                name="username"
+                defaultValue={data?.username}
+                register={register}
+                error={errors.username}
+              />
+              <InputField
+                label="Email"
+                name="email"
+                type="email"
+                defaultValue={data?.email}
+                register={register}
+                error={errors.email}
+              />
+              <InputField
+                label="Password"
+                name="password"
+                type="password"
+                defaultValue={data?.password}
+                register={register}
+                error={errors.password}
+              />
+            </div>
+          </div>
+
+          <div>
+            <h3 className="text-lg font-semibold text-gray-800 mb-4">Personal Information</h3>
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+              <InputField
+                label="First Name"
+                name="firstName"
+                defaultValue={data?.firstName}
+                register={register}
+                error={errors.firstName}
+              />
+              <InputField
+                label="Last Name"
+                name="lastName"
+                defaultValue={data?.lastName}
+                register={register}
+                error={errors.lastName}
+              />
+              <InputField
+                label="Phone"
+                name="phone"
+                defaultValue={data?.phone}
+                register={register}
+                error={errors.phone}
+              />
+              <InputField
+                label="Address"
+                name="address"
+                defaultValue={data?.address}
+                register={register}
+                error={errors.address}
+              />
+              <InputField
+                label="Blood Type"
+                name="bloodType"
+                defaultValue={data?.bloodType}
+                register={register}
+                error={errors.bloodType}
+              />
+              <InputField
+                label="Birthday"
+                name="birthday"
+                defaultValue={data?.birthday}
+                register={register}
+                error={errors.birthday}
+                type="date"
+              />
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-4">
+              <div className="flex flex-col gap-2">
+                <Label className="text-sm font-medium text-gray-700">Gender</Label>
+                <select
+                  defaultValue={data?.gender}
+                  className="ring-1 ring-gray-300 p-3 rounded-lg text-sm w-full focus:ring-2 focus:ring-blue-500 focus:outline-none"
+                  {...register("gender")}
+                >
+                  <option value="">Select Gender</option>
+                  <option value="male">Male</option>
+                  <option value="female">Female</option>
+                </select>
+                {errors.gender?.message && (
+                  <p className="text-xs text-red-600">
+                    {errors.gender.message.toString()}
+                  </p>
+                )}
+              </div>
+
+              <div className="flex flex-col gap-2">
+                <Label className="text-sm font-medium text-gray-700">Profile Photo</Label>
+                <Label
+                  className="border-2 border-dashed border-gray-300 rounded-lg p-4 text-center cursor-pointer hover:border-blue-400 transition-colors"
+                  htmlFor="img"
+                >
+                  <div className="flex flex-col items-center gap-2">
+                    <Image src="/upload.png" alt="Upload" width={32} height={32} />
+                    <span className="text-sm text-gray-600">Upload a photo</span>
+                  </div>
+                </Label>
+                <input type="file" id="img" {...register("img")} className="hidden" accept="image/*" />
+                {errors.img?.message && (
+                  <p className="text-xs text-red-600">
+                    {errors.img.message.toString()}
+                  </p>
+                )}
+              </div>
+            </div>
+          </div>
         </div>
-      </div>
-      <Button
-        variant="outline"
-        className="mt-6 bg-sky-600 text-white p-2 rounded-md self-center w-full text-md"
-      >
-        {type === "create" ? "Create" : "Update"}
-      </Button>
-    </form>
+
+        <div className="flex gap-3 pt-4 border-t">
+          <Button
+            type="button"
+            variant="outline"
+            className="flex-1"
+            onClick={() => window.history.back()}
+          >
+            Cancel
+          </Button>
+          <Button
+            type="submit"
+            className="flex-1 bg-blue-600 hover:bg-blue-700 text-white"
+          >
+            {type === "create" ? "Create Teacher" : "Update Teacher"}
+          </Button>
+        </div>
+      </form>
+    </div>
   );
 };
 

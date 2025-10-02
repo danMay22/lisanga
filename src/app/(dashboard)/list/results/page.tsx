@@ -1,12 +1,13 @@
+'use client';
+
 import FormModdle from "@/components/FormModdle";
 import Pagination from "@/components/Pagination";
 import Table from "@/components/Table";
 import TableSearch from "@/components/TableSearch";
 import { Button } from "@/components/ui/button";
-import { classesData, examsData, lessonsData, parentsData, resultsData, role, studentsData, subjectsData } from "@/lib/data";
+import { resultsData, role } from "@/lib/data";
 import Image from "next/image";
-import Link from "next/link";
-import React from "react";
+import React, { useState, useMemo } from "react";
 
 type Result = {
   id: number;
@@ -20,32 +21,23 @@ type Result = {
 };
 const columns = [
   {
-    header: "Subject Name",
-    accessor: "name",
+    header: "Subject",
+    accessor: "subject",
   },
   {
     header: "Student",
     accessor: "student",
+    className: "hidden md:table-cell",
   },
   {
     header: "Score",
     accessor: "score",
-    className: "hidden md:table-cell",
-  },
-  {
-    header: "Teacher",
-    accessor: "teacher",
-    className: "hidden md:table-cell",
+    className: "hidden lg:table-cell",
   },
   {
     header: "Class",
     accessor: "class",
-    className: "hidden md:table-cell",
-  },
-  {
-    header: "Date",
-    accessor: "date",
-    className: "hidden md:table-cell",
+    className: "hidden lg:table-cell",
   },
   {
     header: "Actions",
@@ -53,24 +45,54 @@ const columns = [
   },
 ];
 function ResultListPage() {
+  const [searchTerm, setSearchTerm] = useState('');
+  const [currentPage, setCurrentPage] = useState(1);
+  const [sortOrder, setSortOrder] = useState<'asc' | 'desc'>('asc');
+  const itemsPerPage = 10;
+
+  const filteredAndSortedResults = useMemo(() => {
+    const filtered = resultsData.filter(result => 
+      result.subject.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      result.student.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      result.class.toLowerCase().includes(searchTerm.toLowerCase())
+    );
+    
+    return filtered.sort((a, b) => {
+      if (sortOrder === 'asc') {
+        return a.subject.localeCompare(b.subject);
+      } else {
+        return b.subject.localeCompare(a.subject);
+      }
+    });
+  }, [searchTerm, sortOrder]);
+
+  const totalPages = Math.ceil(filteredAndSortedResults.length / itemsPerPage);
+  const startIndex = (currentPage - 1) * itemsPerPage;
+  const currentResults = filteredAndSortedResults.slice(startIndex, startIndex + itemsPerPage);
+
+  const handleSort = () => {
+    setSortOrder(prev => prev === 'asc' ? 'desc' : 'asc');
+    setCurrentPage(1);
+  };
+
   const renderRow = (item: Result) => (
     <tr
       key={item.id}
       className="border-b border-gray-600 even:bg-slate-50 text-sm hover:bg-green-300"
     >
-      <td className="flex items-center gap-4 p-4 ">{item.subject}</td>
-      <td>{item.student}</td>
-      <td className="hidden md:table-cell">{item.score}</td>
-      <td className="hidden md:table-cell">{item.teacher}</td>
-      <td className="hidden md:table-cell">{item.class}</td>
-      <td className="hidden md:table-cell">{item.date}</td>
+      <td className="flex items-center gap-4 p-4 font-semibold">{item.subject}</td>
+      <td className="hidden md:table-cell">{item.student}</td>
+      <td className="hidden lg:table-cell">{item.score}/100</td>
+      <td className="hidden lg:table-cell">{item.class}</td>
       <td>
-      <div className="flex items-center gap-2">
-      {role === "admin" && (
+        <div className="flex items-center gap-2">
+          {role === "admin" ? (
             <>
-              <FormModdle table="lesson" type="update" data={item} />
-              <FormModdle table="lesson" type="delete" id={item.id} />
+              <FormModdle table="result" type="update" data={item} />
+              <FormModdle table="result" type="delete" id={item.id} data={item} />
             </>
+          ) : (
+            <span className="text-xs text-gray-400">Admin only</span>
           )}
         </div>
       </td>
@@ -82,12 +104,19 @@ function ResultListPage() {
       <div className="flex items-center justify-between">
         <h1 className="hidden md:block text-lg font-semibold">All Results</h1>
         <div className="flex flex-col md:flex-row items-center gap-4 w-full md:w-auto">
-          <TableSearch />
+          <TableSearch 
+            value={searchTerm}
+            onChange={setSearchTerm}
+            placeholder="Search results..."
+          />
           <div className="flex items-center gap-4 self-end">
-          <Button variant="outline" size="icon" className="w-8 h-8 flex items-center justify-center rounded-md bg-lamaYellow">
-              <Image src="/filter.png" alt="" width={14} height={14} />
-            </Button>
-            <Button variant="outline" size="icon" className="w-8 h-8 flex items-center justify-center rounded-md bg-lamaYellow">
+            <Button 
+              variant="outline" 
+              size="icon" 
+              onClick={handleSort}
+              className="w-8 h-8 flex items-center justify-center rounded-md bg-lamaYellow"
+              title={`Sort ${sortOrder === 'asc' ? 'Z-A' : 'A-Z'}`}
+            >
               <Image src="/sort.png" alt="" width={14} height={14} />
             </Button>
             {role === "admin" && <FormModdle table="result" type="create" />}
@@ -95,9 +124,13 @@ function ResultListPage() {
         </div>
       </div>
       {/* List */}
-      <Table columns={columns} renderRow={renderRow} data={resultsData} />
+      <Table columns={columns} renderRow={renderRow} data={currentResults} />
       {/*Pagination*/}
-      <Pagination />
+      <Pagination 
+        currentPage={currentPage}
+        totalPages={totalPages}
+        onPageChange={setCurrentPage}
+      />
     </div>
   );
 }

@@ -1,3 +1,5 @@
+'use client';
+
 import FormModdle from "@/components/FormModdle";
 import Pagination from "@/components/Pagination";
 import Table from "@/components/Table";
@@ -6,7 +8,7 @@ import { Button } from "@/components/ui/button";
 import { role, studentsData } from "@/lib/data";
 import Image from "next/image";
 import Link from "next/link";
-import React from "react";
+import React, { useState, useMemo } from "react";
 
 type Student = {
   id: number;
@@ -50,6 +52,35 @@ const columns = [
   },
 ];
 function StudentListPage() {
+  const [searchTerm, setSearchTerm] = useState('');
+  const [currentPage, setCurrentPage] = useState(1);
+  const [sortOrder, setSortOrder] = useState<'asc' | 'desc'>('asc');
+  const itemsPerPage = 10;
+
+  const filteredAndSortedStudents = useMemo(() => {
+    const filtered = studentsData.filter(student => 
+      student.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      student.email?.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      student.class.toLowerCase().includes(searchTerm.toLowerCase())
+    );
+    
+    return filtered.sort((a, b) => {
+      if (sortOrder === 'asc') {
+        return a.name.localeCompare(b.name);
+      } else {
+        return b.name.localeCompare(a.name);
+      }
+    });
+  }, [searchTerm, sortOrder]);
+
+  const totalPages = Math.ceil(filteredAndSortedStudents.length / itemsPerPage);
+  const startIndex = (currentPage - 1) * itemsPerPage;
+  const currentStudents = filteredAndSortedStudents.slice(startIndex, startIndex + itemsPerPage);
+
+  const handleSort = () => {
+    setSortOrder(prev => prev === 'asc' ? 'desc' : 'asc');
+    setCurrentPage(1);
+  };
   const renderRow = (item: Student) => (
     <tr
       key={item.id}
@@ -74,16 +105,13 @@ function StudentListPage() {
       <td className="hidden md:table-cell">{item.address}</td>
       <td>
         <div className="flex items-center gap-2">
-          <Link href={`/list/teachers/${item.id}`}>
+          <Link href={`/list/students/${item.id}`}>
             <Button variant="outline" size="icon"  className="w-8 h-8 items-center justify-center rounded-lg ">
               <Image src="/views.png" alt="" width={20} height={20} />
             </Button>
           </Link>
           {role === "admin" && (
-            //<Button variant="outline" size="icon"  className="w-8 h-8 items-center justify-center rounded-lg ">
-           // <Image src="/delete2.png" alt="" width={20} height={20} />
-           // </Button>
-            <FormModdle table="student" type="delete" id={item.id}/>
+            <FormModdle table="student" type="delete" id={item.id} data={item}/>
           )}
         </div>
       </td>
@@ -95,12 +123,19 @@ function StudentListPage() {
       <div className="flex items-center justify-between">
         <h1 className="hidden md:block text-lg font-semibold">Students</h1>
         <div className="flex flex-col md:flex-row items-center gap-4 w-full md:w-auto">
-          <TableSearch />
+          <TableSearch 
+            value={searchTerm}
+            onChange={setSearchTerm}
+            placeholder="Search students..."
+          />
           <div className="flex items-center gap-4 self-end">
-            <Button variant="outline" size="icon" className="w-8 h-8 flex items-center justify-center rounded-md bg-lamaYellow">
-              <Image src="/filter.png" alt="" width={14} height={14} />
-            </Button>
-            <Button variant="outline" size="icon" className="w-8 h-8 flex items-center justify-center rounded-md bg-lamaYellow">
+            <Button 
+              variant="outline" 
+              size="icon" 
+              onClick={handleSort}
+              className="w-8 h-8 flex items-center justify-center rounded-md bg-lamaYellow"
+              title={`Sort ${sortOrder === 'asc' ? 'Z-A' : 'A-Z'}`}
+            >
               <Image src="/sort.png" alt="" width={14} height={14} />
             </Button>
             {role === "admin" && (
@@ -113,9 +148,13 @@ function StudentListPage() {
         </div>
       </div>
       {/* List */}
-      <Table columns={columns} renderRow={renderRow} data={studentsData} />
+      <Table columns={columns} renderRow={renderRow} data={currentStudents} />
       {/*Pagination*/}
-      <Pagination />
+      <Pagination 
+        currentPage={currentPage}
+        totalPages={totalPages}
+        onPageChange={setCurrentPage}
+      />
     </div>
   );
 }

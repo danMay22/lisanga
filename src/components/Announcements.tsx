@@ -1,7 +1,11 @@
+'use client';
+
 import React from "react";
 import { Label } from "./ui/label";
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "./ui/dropdown-menu";
 import { MoreHorizontal, Edit, Trash2 } from "lucide-react";
+import { useRouter } from "next/navigation";
+import { toast } from "sonner";
 
 const announcements = [
   {
@@ -42,12 +46,14 @@ const announcements = [
 ];
 
 function Announcements() {
+  const router = useRouter();
+  
   const handleEdit = (id: number) => {
-    console.log("Edit announcement:", id);
+    router.push('/events');
   };
   
   const handleDelete = (id: number) => {
-    console.log("Delete announcement:", id);
+    toast.error('You need to be an admin to delete announcements. Please contact an administrator.');
   };
 
   const getBorderColor = (priority: string) => {
@@ -61,10 +67,7 @@ function Announcements() {
 
   return (
     <div className="bg-white p-4 rounded-md">
-      <div className="flex items-center justify-between">
-        <Label className="text-xl font-semibold">Annoucements: </Label>
-        <a href="/events" className="text-xs text-blue-500 hover:underline">View All</a>
-      </div>
+
       <div className="flex flex-col gap-4 mt-4">
         {announcements.map((announcement) => (
           <div

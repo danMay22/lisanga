@@ -19,6 +19,92 @@ const forms: {
 }={
 teacher: (type,data) => <TeacherForm type={type} data={data}/>,
 student: (type,data) => <StudentForm type={type}  data={data}/>,
+parent: (type,data) => <div className="p-4"><h3 className="text-lg font-semibold mb-4">{type === 'create' ? 'Create' : 'Update'} Parent</h3><p className="text-gray-600">Parent form coming soon...</p></div>,
+exam: (type,data) => (
+  <div className="p-6">
+    <h3 className="text-xl font-semibold mb-6">{type === 'create' ? 'Create' : 'Update'} Exam</h3>
+    <form className="space-y-4">
+      <div>
+        <label className="block text-sm font-medium mb-2">Subject</label>
+        <input type="text" defaultValue={data?.subject} className="w-full p-2 border rounded-md" placeholder="Enter subject" />
+      </div>
+      <div>
+        <label className="block text-sm font-medium mb-2">Class</label>
+        <input type="text" defaultValue={data?.class} className="w-full p-2 border rounded-md" placeholder="Enter class" />
+      </div>
+      <div>
+        <label className="block text-sm font-medium mb-2">Teacher</label>
+        <input type="text" defaultValue={data?.teacher} className="w-full p-2 border rounded-md" placeholder="Enter teacher name" />
+      </div>
+      <div>
+        <label className="block text-sm font-medium mb-2">Date</label>
+        <input type="date" defaultValue={data?.date} className="w-full p-2 border rounded-md" />
+      </div>
+      <div className="flex gap-3 pt-4">
+        <Button className="bg-blue-600 hover:bg-blue-700 px-6">Save</Button>
+        <Button variant="outline" className="px-6">Cancel</Button>
+      </div>
+    </form>
+  </div>
+),
+assignment: (type,data) => (
+  <div className="p-6">
+    <h3 className="text-xl font-semibold mb-6">{type === 'create' ? 'Create' : 'Update'} Assignment</h3>
+    <form className="space-y-4">
+      <div>
+        <label className="block text-sm font-medium mb-2">Subject</label>
+        <input type="text" defaultValue={data?.subject} className="w-full p-2 border rounded-md" placeholder="Enter subject" />
+      </div>
+      <div>
+        <label className="block text-sm font-medium mb-2">Class</label>
+        <input type="text" defaultValue={data?.class} className="w-full p-2 border rounded-md" placeholder="Enter class" />
+      </div>
+      <div>
+        <label className="block text-sm font-medium mb-2">Teacher</label>
+        <input type="text" defaultValue={data?.teacher} className="w-full p-2 border rounded-md" placeholder="Enter teacher name" />
+      </div>
+      <div>
+        <label className="block text-sm font-medium mb-2">Due Date</label>
+        <input type="date" defaultValue={data?.dueDate} className="w-full p-2 border rounded-md" />
+      </div>
+      <div className="flex gap-3 pt-4">
+        <Button className="bg-blue-600 hover:bg-blue-700 px-6">Save</Button>
+        <Button variant="outline" className="px-6">Cancel</Button>
+      </div>
+    </form>
+  </div>
+),
+result: (type,data) => (
+  <div className="p-6">
+    <h3 className="text-xl font-semibold mb-6">{type === 'create' ? 'Create' : 'Update'} Result</h3>
+    <form className="space-y-4">
+      <div>
+        <label className="block text-sm font-medium mb-2">Subject</label>
+        <input type="text" defaultValue={data?.subject} className="w-full p-2 border rounded-md" placeholder="Enter subject" />
+      </div>
+      <div>
+        <label className="block text-sm font-medium mb-2">Student</label>
+        <input type="text" defaultValue={data?.student} className="w-full p-2 border rounded-md" placeholder="Enter student name" />
+      </div>
+      <div>
+        <label className="block text-sm font-medium mb-2">Class</label>
+        <input type="text" defaultValue={data?.class} className="w-full p-2 border rounded-md" placeholder="Enter class" />
+      </div>
+      <div>
+        <label className="block text-sm font-medium mb-2">Score</label>
+        <input type="number" min="0" max="100" defaultValue={data?.score} className="w-full p-2 border rounded-md" placeholder="Enter score (0-100)" />
+      </div>
+      <div>
+        <label className="block text-sm font-medium mb-2">Date</label>
+        <input type="date" defaultValue={data?.date} className="w-full p-2 border rounded-md" />
+      </div>
+      <div className="flex gap-3 pt-4">
+        <Button className="bg-blue-600 hover:bg-blue-700 px-6">Save</Button>
+        <Button variant="outline" className="px-6">Cancel</Button>
+      </div>
+    </form>
+  </div>
+),
 };
 
 interface FormModdleProps {
@@ -46,17 +132,39 @@ const FormModdle: React.FC<FormModdleProps> = ({ table, type, data, id }) => {
   const [open, setOpen] = useState(false);
   const Form = () => {
     return type === "delete" && id ? (
-      <form action="" className="p-4 flex flex-col gap-4 shadow-md">
-        <span className="text-center font-medium text-lg">
-          All Data will be lost. Are you absolutely sure you want to delete this{" "}
-          <Badge variant="outline" className="text-center font-medium text-lg">
-            {table} ??
-          </Badge>
-        </span>
-        <Button className="bg-red-700 py-2 px-4 rounded-md border-none w-max self-center">
-          Delete
-        </Button>
-      </form>
+      <div className="p-6 flex flex-col gap-6">
+        <div className="text-center">
+          <h3 className="text-xl font-semibold text-gray-900 mb-2">Delete {table}</h3>
+          <p className="text-gray-600 mb-4">
+            All data will be lost. Are you absolutely sure you want to delete:
+          </p>
+          <div className="bg-red-50 border border-red-200 rounded-lg p-4 mb-4">
+            <p className="font-medium text-red-800">
+              {data?.name || `${table} #${id}`}
+            </p>
+            <p className="text-sm text-red-600">ID: {id}</p>
+          </div>
+          <p className="text-sm text-gray-500">This action cannot be undone.</p>
+        </div>
+        <div className="flex gap-3 justify-center">
+          <Button 
+            variant="outline" 
+            onClick={() => setOpen(false)}
+            className="px-6"
+          >
+            Cancel
+          </Button>
+          <Button 
+            className="bg-red-600 hover:bg-red-700 px-6"
+            onClick={() => {
+              // Handle delete logic here
+              setOpen(false);
+            }}
+          >
+            Delete
+          </Button>
+        </div>
+      </div>
     ) : type === "create" || type === "update" ? (
       forms[table](type,data)
     ):(

@@ -1,9 +1,11 @@
 import type { Metadata } from "next";
 import "./globals.css";
+import { Toaster } from "sonner";
+import { LanguageProvider } from "@/contexts/LanguageContext";
 
 export const metadata: Metadata = {
-  title: "Lama Dev School Management Dashboard",
-  description: "Next.js School Management System",
+  title: "School Management Dashboard",
+  description: "Multilingual School Management System",
 };
 
 export default function RootLayout({
@@ -14,9 +16,10 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className="font-sans">
-      
+        <LanguageProvider>
           {children}
-
+          <Toaster />
+        </LanguageProvider>
       </body>
     </html>
   );

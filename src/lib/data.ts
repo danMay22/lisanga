@@ -248,6 +248,47 @@ export const studentsData = [
   },
 ];
 
+// Teacher-Student relationships
+export const teacherStudents = {
+  1: [ // John Doe's students
+    { id: 1, name: "Sarah Johnson", studentId: "STU001", class: "5A" },
+    { id: 2, name: "Mike Wilson", studentId: "STU002", class: "5A" },
+    { id: 3, name: "Emma Davis", studentId: "STU003", class: "5A" },
+    { id: 4, name: "James Brown", studentId: "STU004", class: "5A" },
+    { id: 5, name: "Lisa Garcia", studentId: "STU005", class: "5A" }
+  ],
+  2: [ // Jane Doe's students
+    { id: 6, name: "Anna Martinez", studentId: "STU006", class: "4B" },
+    { id: 7, name: "David Lee", studentId: "STU007", class: "4B" },
+    { id: 8, name: "Sophie Taylor", studentId: "STU008", class: "4B" }
+  ]
+};
+
+// Attendance records
+export const attendanceData = [
+  {
+    id: 1,
+    date: "2025-01-15",
+    teacherId: 1,
+    present: [1, 2, 4, 5],
+    absent: [3]
+  },
+  {
+    id: 2,
+    date: "2025-01-14",
+    teacherId: 1,
+    present: [1, 2, 3, 5],
+    absent: [4]
+  },
+  {
+    id: 3,
+    date: "2025-01-15",
+    teacherId: 2,
+    present: [6, 7],
+    absent: [8]
+  }
+];
+
 export const parentsData = [
   {
     id: 1,
@@ -421,7 +462,7 @@ export const classesData = [
     supervisor: "Iva Frank",
   },
   {
-    id: 5,
+    id: 6,
     name: "5B",
     capacity: 20,
     grade: 5,
@@ -916,146 +957,286 @@ export const announcementsData = [
 ];
 
 
+// Grade data for students
+export const studentGrades = {
+  1: [ // Student ID 1 grades
+    { subject: "Math", semester1: 8.5, semester2: 9.1 },
+    { subject: "English", semester1: 9.2, semester2: 8.8 },
+    { subject: "Physics", semester1: 7.8, semester2: 8.5 },
+    { subject: "Chemistry", semester1: 9.5, semester2: 9.8 },
+    { subject: "Biology", semester1: 8.9, semester2: 9.3 }
+  ],
+  2: [ // Student ID 2 grades
+    { subject: "Math", semester1: 7.5, semester2: 8.1 },
+    { subject: "English", semester1: 8.2, semester2: 7.8 },
+    { subject: "Physics", semester1: 6.8, semester2: 7.5 },
+    { subject: "Chemistry", semester1: 8.5, semester2: 8.8 },
+    { subject: "Biology", semester1: 7.9, semester2: 8.3 }
+  ]
+};
+
+// Teacher class grades (average of all students in their class)
+export const teacherClassGrades = {
+  1: [ // Teacher ID 1 class grades
+    { studentId: 1, studentName: "John Doe", semester1: 8.5, semester2: 9.1 },
+    { studentId: 2, studentName: "Jane Doe", semester1: 7.5, semester2: 8.1 },
+    { studentId: 3, studentName: "Mike Geller", semester1: 9.2, semester2: 8.8 },
+    { studentId: 4, studentName: "Jay French", semester1: 7.8, semester2: 8.5 },
+    { studentId: 5, studentName: "Jane Smith", semester1: 8.9, semester2: 9.3 }
+  ]
+};
+
 // Calendar events for next week starting Monday September 30, 2025
 export const calendarEvents = [
   {
-    title: "Math",
+    id: 1,
+    title: "Math - Algebra",
+    subject: "Math",
+    teacher: "John Doe",
+    class: "5A",
+    room: "Room 101",
     allDay: false,
     start: new Date(2025, 8, 30, 8, 0),
     end: new Date(2025, 8, 30, 9, 0),
   },  
   {
-    title: "English",
+    id: 2,
+    title: "English - Literature",
+    subject: "English",
+    teacher: "Jane Smith",
+    class: "5A",
+    room: "Room 102",
     allDay: false,
     start: new Date(2025, 8, 30, 9, 0),
     end: new Date(2025, 8, 30, 10, 0),
   },
   {
-    title: "Biology",
+    id: 3,
+    title: "Biology - Cell Structure",
+    subject: "Biology",
+    teacher: "Mike Geller",
+    class: "5A",
+    room: "Lab 201",
     allDay: false,
     start: new Date(2025, 8, 30, 10, 0),
     end: new Date(2025, 8, 30, 11, 0),
   },
   {
-    title: "Chemistry",
+    id: 4,
+    title: "Chemistry - Organic",
+    subject: "Chemistry",
+    teacher: "Anna Santiago",
+    class: "5A",
+    room: "Lab 202",
     allDay: false,
     start: new Date(2025, 8, 30, 13, 0),
     end: new Date(2025, 8, 30, 14, 0),
   },
   {
-    title: "History",
+    id: 5,
+    title: "History - World War II",
+    subject: "History",
+    teacher: "Jay French",
+    class: "5A",
+    room: "Room 103",
     allDay: false,
     start: new Date(2025, 8, 30, 14, 0),
     end: new Date(2025, 8, 30, 15, 0),
   },
   {
-    title: "English",
+    id: 6,
+    title: "English - Grammar",
+    subject: "English",
+    teacher: "Jane Smith",
+    class: "5A",
+    room: "Room 102",
     allDay: false,
     start: new Date(2025, 9, 1, 9, 0),
     end: new Date(2025, 9, 1, 10, 0),
   },
-    {
-    title: "Biology",
+  {
+    id: 7,
+    title: "Biology - Genetics",
+    subject: "Biology",
+    teacher: "Mike Geller",
+    class: "5A",
+    room: "Lab 201",
     allDay: false,
     start: new Date(2025, 9, 1, 10, 0),
     end: new Date(2025, 9, 1, 11, 0),
   },
   {
-    title: "Physics",
+    id: 8,
+    title: "Physics - Mechanics",
+    subject: "Physics",
+    teacher: "Allen Black",
+    class: "5A",
+    room: "Lab 203",
     allDay: false,
     start: new Date(2025, 9, 1, 11, 0),
     end: new Date(2025, 9, 1, 12, 0),
   },
   {
-    title: "Chemistry",
+    id: 9,
+    title: "Chemistry - Reactions",
+    subject: "Chemistry",
+    teacher: "Anna Santiago",
+    class: "5A",
+    room: "Lab 202",
     allDay: false,
     start: new Date(2025, 9, 1, 13, 0),
     end: new Date(2025, 9, 1, 14, 0),
   },
   {
-    title: "History",
+    id: 10,
+    title: "History - Ancient Rome",
+    subject: "History",
+    teacher: "Jay French",
+    class: "5A",
+    room: "Room 103",
     allDay: false,
     start: new Date(2025, 9, 1, 14, 0),
     end: new Date(2025, 9, 1, 15, 0),
   },
   {
-    title: "Physics",
+    id: 11,
+    title: "Physics - Thermodynamics",
+    subject: "Physics",
+    teacher: "Allen Black",
+    class: "5A",
+    room: "Lab 203",
     allDay: false,
     start: new Date(2025, 9, 2, 11, 0),
     end: new Date(2025, 9, 2, 12, 0),
   },
-
   {
-    title: "History",
+    id: 12,
+    title: "History - Renaissance",
+    subject: "History",
+    teacher: "Jay French",
+    class: "5A",
+    room: "Room 103",
     allDay: false,
     start: new Date(2025, 9, 2, 14, 0),
     end: new Date(2025, 9, 2, 15, 0),
   },
   {
-    title: "Math",
+    id: 13,
+    title: "Math - Geometry",
+    subject: "Math",
+    teacher: "John Doe",
+    class: "5A",
+    room: "Room 101",
     allDay: false,
     start: new Date(2025, 9, 2, 8, 0),
     end: new Date(2025, 9, 2, 9, 0),
   },
   {
-    title: "Biology",
+    id: 14,
+    title: "Biology - Ecology",
+    subject: "Biology",
+    teacher: "Mike Geller",
+    class: "5A",
+    room: "Lab 201",
     allDay: false,
     start: new Date(2025, 9, 2, 10, 0),
     end: new Date(2025, 9, 2, 11, 0),
   },
-
   {
-    title: "Chemistry",
+    id: 15,
+    title: "Chemistry - Lab Work",
+    subject: "Chemistry",
+    teacher: "Anna Santiago",
+    class: "5A",
+    room: "Lab 202",
     allDay: false,
     start: new Date(2025, 9, 2, 13, 0),
     end: new Date(2025, 9, 2, 14, 0),
   },
   {
-    title: "History",
+    id: 16,
+    title: "History - Modern Era",
+    subject: "History",
+    teacher: "Jay French",
+    class: "5A",
+    room: "Room 103",
     allDay: false,
     start: new Date(2025, 9, 3, 14, 0),
     end: new Date(2025, 9, 3, 15, 0),
   },
   {
-    title: "English",
+    id: 17,
+    title: "English - Poetry",
+    subject: "English",
+    teacher: "Jane Smith",
+    class: "5A",
+    room: "Room 102",
     allDay: false,
     start: new Date(2025, 9, 3, 9, 0),
     end: new Date(2025, 9, 3, 10, 0),
   },
   {
-    title: "Biology",
+    id: 18,
+    title: "Biology - Evolution",
+    subject: "Biology",
+    teacher: "Mike Geller",
+    class: "5A",
+    room: "Lab 201",
     allDay: false,
     start: new Date(2025, 9, 3, 10, 0),
     end: new Date(2025, 9, 3, 11, 0),
   },
   {
-    title: "Physics",
+    id: 19,
+    title: "Physics - Electricity",
+    subject: "Physics",
+    teacher: "Allen Black",
+    class: "5A",
+    room: "Lab 203",
     allDay: false,
     start: new Date(2025, 9, 3, 11, 0),
     end: new Date(2025, 9, 3, 12, 0),
   },
-
   {
-    title: "History",
+    id: 20,
+    title: "History - Geography",
+    subject: "History",
+    teacher: "Jay French",
+    class: "5A",
+    room: "Room 103",
     allDay: false,
     start: new Date(2025, 9, 4, 14, 0),
     end: new Date(2025, 9, 4, 15, 0),
   },
   {
-    title: "Math",
+    id: 21,
+    title: "Math - Calculus",
+    subject: "Math",
+    teacher: "John Doe",
+    class: "5A",
+    room: "Room 101",
     allDay: false,
     start: new Date(2025, 9, 4, 8, 0),
     end: new Date(2025, 9, 4, 9, 0),
   },
   {
-    title: "English",
+    id: 22,
+    title: "English - Essay Writing",
+    subject: "English",
+    teacher: "Jane Smith",
+    class: "5A",
+    room: "Room 102",
     allDay: false,
     start: new Date(2025, 9, 4, 9, 0),
     end: new Date(2025, 9, 4, 10, 0),
   },
-
   {
-    title: "Physics",
+    id: 23,
+    title: "Physics - Optics",
+    subject: "Physics",
+    teacher: "Allen Black",
+    class: "5A",
+    room: "Lab 203",
     allDay: false,
     start: new Date(2025, 9, 4, 11, 0),
     end: new Date(2025, 9, 4, 12, 0),

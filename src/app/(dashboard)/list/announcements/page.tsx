@@ -1,12 +1,7 @@
-import FormModdle from "@/components/FormModdle";
-import Pagination from "@/components/Pagination";
-import Table from "@/components/Table";
-import TableSearch from "@/components/TableSearch";
-import { Button } from "@/components/ui/button";
-import { announcementsData, role } from "@/lib/data";
-import Image from "next/image";
-import Link from "next/link";
-import React from "react";
+'use client';
+
+import { announcementsData } from "@/lib/data";
+import React, { useState, useMemo } from "react";
 
 type Announcement = {
   id: number;
@@ -34,48 +29,66 @@ const columns = [
   },
 ];
 function AnnouncementListPage() {
-  const renderRow = (item: Announcement ) => (
-    <tr
-      key={item.id}
-      className="border-b border-gray-600 even:bg-slate-50 text-sm hover:bg-green-300"
-    >
-      <td className="flex items-center gap-4 p-4 ">{item.title}</td>
-      <td>{item.class}</td>
-      <td className="hidden md:table-cell">{item.date}</td>
-      <td>
-      <div className="flex items-center gap-2">
-      {role === "admin" && (
-            <>
-              <FormModdle table="announcement" type="update" data={item} />
-              <FormModdle table="announcement" type="delete" id={item.id} />
-            </>
-          )}
-        </div>
-      </td>
-    </tr>
-  );
+  const [searchTerm, setSearchTerm] = useState('');
+
+  const filteredAnnouncements = useMemo(() => {
+    return announcementsData.filter(announcement => 
+      announcement.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      announcement.class.toLowerCase().includes(searchTerm.toLowerCase())
+    );
+  }, [searchTerm]);
   return (
-    <div className="bg-white p-4 rounded-md flex-1 m-4 mt-0">
-      {/*Top*/}
-      <div className="flex items-center justify-between">
-        <h1 className="hidden md:block text-lg font-semibold">All Annoucements</h1>
-        <div className="flex flex-col md:flex-row items-center gap-4 w-full md:w-auto">
-          <TableSearch />
-          <div className="flex items-center gap-4 self-end">
-          <Button variant="outline" size="icon" className="w-8 h-8 flex items-center justify-center rounded-md bg-lamaYellow">
-              <Image src="/filter.png" alt="" width={14} height={14} />
-            </Button>
-            <Button variant="outline" size="icon" className="w-8 h-8 flex items-center justify-center rounded-md bg-lamaYellow">
-              <Image src="/sort.png" alt="" width={14} height={14} />
-            </Button>
-            {role === "admin" && <FormModdle table="announcement" type="create" />}
+    <div className="container mx-auto px-4 py-8">
+      <div className="space-y-6">
+        <div className="flex items-center justify-between">
+          <div className="flex items-center gap-3">
+            <div className="relative">
+              <span className="text-2xl">📢</span>
+              <span className="absolute -top-2 -right-2 bg-red-500 text-white text-xs rounded-full h-5 w-5 flex items-center justify-center">
+                {filteredAnnouncements.length}
+              </span>
+            </div>
+            <div>
+              <h1 className="text-3xl font-bold">Announcements</h1>
+              <p className="text-gray-600">Important updates and notifications</p>
+            </div>
           </div>
         </div>
+        
+        <div className="flex gap-4 items-center">
+          <div className="relative flex-1 max-w-sm">
+            <input 
+              className="flex h-10 w-full rounded-md border border-gray-300 bg-white px-3 py-2 text-sm pl-10" 
+              placeholder="Search announcements..." 
+              value={searchTerm}
+              onChange={(e) => setSearchTerm(e.target.value)}
+            />
+          </div>
+        </div>
+        
+        <div className="space-y-6">
+          {filteredAnnouncements.map((announcement) => (
+            <article key={announcement.id} className="bg-white p-6 rounded-lg shadow-sm border">
+              <div className="flex justify-between items-start mb-4">
+                <div>
+                  <h3 className="text-lg font-semibold text-gray-900 mb-1">{announcement.title}</h3>
+                  <div className="flex items-center gap-2 text-sm text-gray-500">
+                    <span>Class {announcement.class}</span>
+                    <span>•</span>
+                    <span>{announcement.date}</span>
+                  </div>
+                </div>
+                <div className="inline-flex items-center rounded-full border px-2.5 py-0.5 text-xs font-semibold bg-blue-100 text-blue-800">
+                  {announcement.class}
+                </div>
+              </div>
+              <p className="text-gray-700 leading-relaxed">
+                Important announcement regarding {announcement.title.toLowerCase()}. Please check with your class teacher for more details and follow the instructions provided.
+              </p>
+            </article>
+          ))}
+        </div>
       </div>
-      {/* List */}
-      <Table columns={columns} renderRow={renderRow} data={announcementsData} />
-      {/*Pagination*/}
-      <Pagination />
     </div>
   );
 }

@@ -4,7 +4,8 @@ import { cn } from '@/lib/utils'
 import Link from 'next/link';
 import UserMenu from '../UserMenu';
 import { Button } from '../ui/button';
-import { usePathname } from 'next/navigation';
+import { usePathname, useRouter } from 'next/navigation';
+import { LanguageToggle } from '../LanguageToggle';
 
 interface HeaderProps {
   className?: string;
@@ -12,23 +13,27 @@ interface HeaderProps {
 
 export const Header= ({ className }: HeaderProps) => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [mounted, setMounted] = useState(false);
   const pathname = usePathname();
+  const router = useRouter();
   const isHomePage = pathname === '/';
 
   useEffect(() => {
+    setMounted(true);
     const checkAuth = () => {
-      const loggedIn = localStorage.getItem('isLoggedIn') === 'true';
-      setIsLoggedIn(loggedIn);
+      if (typeof window !== 'undefined') {
+        const loggedIn = localStorage.getItem('isLoggedIn') === 'true';
+        setIsLoggedIn(loggedIn);
+      }
     };
     checkAuth();
     window.addEventListener('storage', checkAuth);
     return () => window.removeEventListener('storage', checkAuth);
   }, []);
 
-  const handleSignOut = () => {
-    localStorage.removeItem('isLoggedIn');
-    setIsLoggedIn(false);
-  };
+  if (!mounted) {
+    return null;
+  }
 
   return (
     <header className={cn('fixed top-0 w-full z-50 border-b bg-white backdrop-blur', className )}>
@@ -37,15 +42,14 @@ export const Header= ({ className }: HeaderProps) => {
           className="flex items-center space-x-2 font-bold text-xl hover:opacity-80 transition-opacity">
           LISANGA School
         </Link>
-        <div className='flex items-center gap-4'>
+        <div className='flex items-center gap-2 sm:gap-4'>
+          <LanguageToggle />
           {isLoggedIn ? (
             <>
-              <UserMenu onSignOut={handleSignOut} />
-              {!isHomePage && (
-                <Button variant="outline">
-                  <Link href="/">Retour</Link>
-                </Button>
-              )}
+              <UserMenu />
+              <Button variant="outline" onClick={() => router.back()}>
+                Retour
+              </Button>
             </>
           ) : (
             <Button>

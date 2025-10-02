@@ -1,49 +1,32 @@
 
-import Announcements from "@/components/Announcements";
-import AttendanceChart from "@/components/AttendanceChart";
-import CountChart from "@/components/CountChart";
+import ArticleManager from "@/components/ArticleManager";
 import EventCalendar from "@/components/EventCalendar";
-import FinanceChart from "@/components/FinanceChart";
-import Blogs from "@/components/home/blogs";
-import UserCard from "@/components/UserCard";
+import TeacherAttendance from "@/components/TeacherAttendance";
+import AdminStudentAttendance from "@/components/AdminStudentAttendance";
 import React from "react";
 
 function AdminPage() {
   return (
-    <div className="p-4 flex gap-4 flex-col md:flex-row">
-      {/* LEFT */}
-      <div className="w-full lg:w-2/3 flex flex-col gap-8">
-        {/* User Cards */}
-        <div className="flex gap-4 justify-between flex-wrap">
-          <UserCard type="students" />
-          <UserCard type="teachers" />
-          <UserCard type="staffs" />
-        </div>
-        {/* chart */}
-        <div className="flex gap-4 justify-between flex-col lg:flex-row">
-          {/* count chart */}
-          <div className="w-full lg:w-1/3 h-[450px]">
-            <CountChart />
-          </div>
-          {/* attendance chart */}
-          <div className="w-full lg:w-2/3 h-[450px]">
-          <AttendanceChart/>
-          </div>
-        </div>
-        {/*bottom */}
-        <div className="w-full h-[500px]">
-          <FinanceChart/>
-        </div>
-        <div className="w-full h-[900px]">
-          <Blogs/>
-        </div>
+    <div className="p-2 sm:p-4 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-12 gap-2 sm:gap-4 auto-rows-min">
+      {/* Teacher Attendance - Large block */}
+      <div className="col-span-1 sm:col-span-2 lg:col-span-5 lg:row-span-2">
+        <TeacherAttendance />
       </div>
-      {/* RIGHT */}
-      <div className="w-full lg:w-1/3 flex flex-col gap-8">
-       <EventCalendar/>
-       <Announcements/>
+      
+      {/* Event Calendar - Tall block */}
+      <div className="col-span-1 sm:col-span-2 lg:col-span-7 lg:row-span-3">
+        <EventCalendar />
       </div>
-
+      
+      {/* Article Manager - Left side */}
+      <div className="col-span-1 sm:col-span-2 lg:col-span-8">
+        <ArticleManager />
+      </div>
+      
+      {/* Student Attendance - Right of Article Manager */}
+      <div className="col-span-1 sm:col-span-2 lg:col-span-4">
+        <AdminStudentAttendance />
+      </div>
     </div>
   );
 }

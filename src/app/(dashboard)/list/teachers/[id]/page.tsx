@@ -1,14 +1,31 @@
 "use client";
-import React from "react";
+import React, { useState, useEffect } from "react";
 import Image from "next/image";
 import BigCalendar from "@/components/BigCalendar";
 import Announcements from "@/components/Announcements";
 import Link from "next/link";
-import Performance from "@/components/Performance";
+import TeacherPerformance from "@/components/TeacherPerformance";
 import { Button } from "@/components/ui/button";
 import FormModdle from "@/components/FormModdle";
+import { teachersData } from "@/lib/data";
 
-function SingleTeacherPage() {
+function SingleTeacherPage({ params }: { params: Promise<{ id: string }> }) {
+  const [mounted, setMounted] = useState(false);
+  const resolvedParams = React.use(params);
+  const teacherId = parseInt(resolvedParams.id);
+  const teacher = teachersData.find(t => t.id === teacherId);
+  
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+  
+  if (!teacher) {
+    return <div>Teacher not found</div>;
+  }
+  
+  if (!mounted) {
+    return <div>Loading...</div>;
+  }
   return (
     <div className="flex-1 p-4 flex flex-col gap-4 xl:flex-row ">
       {/*LEFT*/}
@@ -20,8 +37,8 @@ function SingleTeacherPage() {
             <a href="#">
               <Image
                 className="w-full rounded-lg sm:rounded-none sm:rounded-l-lg"
-                src="https://images.pexels.com/photos/2888150/pexels-photo-2888150.jpeg?auto=compress&cs=tinysrgb&w=1200"
-                alt="Jese Avatar"
+                src={teacher.photo}
+                alt={`${teacher.name} Avatar`}
                 width={144}
                 height={144}
               />
@@ -29,30 +46,16 @@ function SingleTeacherPage() {
             <div className="p-5">
               <div className="flex items-center gap-4 ">
               <h1 className="text-xl font-semibold tracking-tight text-gray-900 dark:text-white">
-                Jese Lumunga
+                {teacher.name}
               </h1>
               <FormModdle
                 table="teacher"
                 type="update"
-                data={{
-                  id: 1,
-                  username: "prof221",
-                  email: "joe@gmail.com",
-                  password: "hjasddko11",
-                  firstName: "John",
-                  lastName: "Mayunga",
-                  phone: "0984566789",
-                  address: "44 guh st, GP, South Africa",
-                  bloodType: "A+",
-                  birthday: "2000-01-1",
-                  genre: "male",
-                  img: "https://images.pexels.com/photos/2888150/pexels-photo-2888150.jpeg?auto=compress&cs=tinysrgb&w=1200",
-                }}
+                data={teacher}
               />
               </div>
               <p className="text-sm mt-3 mb-4 font-light text-gray-500 dark:text-gray-400">
-                Jese drives the Technical Gym, Strategy and Math for the school
-                platform and brand.
+                {teacher.name} teaches {teacher.subjects.join(', ')} for classes {teacher.classes.join(', ')}.
               </p>
               <ul className="flex items-center justify-between gap-2 flex-wrap text-xs font-medium">
                 <li className="w-full md:w-1/3 lg:w-full 2xl:w-1/3 flex items-center gap-2">
@@ -115,7 +118,7 @@ function SingleTeacherPage() {
                     </svg>
                   </a>
                   <span className="flex items-center justify-between gap-2 flex-wrap  font-medium">
-                    user@gmail.com
+                    {teacher.email}
                   </span>
                 </li>
                 <li className="w-full md:w-1/3 lg:w-full 2xl:w-1/3 flex items-center gap-2">
@@ -135,7 +138,7 @@ function SingleTeacherPage() {
                     </svg>{" "}
                   </a>
                   <span className="flex items-center justify-between gap-2 flex-wrap font-medium">
-                    +27 98765421
+                    {teacher.phone}
                   </span>
                 </li>
               </ul>
@@ -168,8 +171,8 @@ function SingleTeacherPage() {
                 className="w-6 h-6 "
               />
               <div className="">
-                <h1 className="text-xl font-semibold">2</h1>
-                <span className="text-sm text-gray-400">Branches</span>
+                <h1 className="text-xl font-semibold">{mounted ? teacher.classes.length : 0}</h1>
+                <span className="text-sm text-gray-400">Grades</span>
               </div>
             </div>
 
@@ -243,7 +246,11 @@ function SingleTeacherPage() {
             </Link>
           </div>
         </div>
-        <Performance />
+        <TeacherPerformance 
+          teacherId={teacherId} 
+          className={teacher.classes.join(', ')} 
+          totalStudents={5} 
+        />
         <Announcements />
       </div>
     </div>
