@@ -30,7 +30,7 @@ export function LoginForm() {
     
     setTimeout(() => {
       localStorage.setItem('isLoggedIn', 'true');
-      router.push('/student');
+      router.push('/admin');
       setIsLoading(false);
     }, 500);
   };

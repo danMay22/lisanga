@@ -1,14 +1,13 @@
 'use client';
 
 import FormModdle from "@/components/FormModdle";
-import Pagination from "@/components/Pagination";
-import Table from "@/components/Table";
 import TableSearch from "@/components/TableSearch";
 import { Button } from "@/components/ui/button";
+import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { parentsData, role } from "@/lib/data";
 import Image from "next/image";
-import Link from "next/link";
 import React, { useState, useMemo } from "react";
+import { ChevronLeft, ChevronRight } from "lucide-react";
 
 type Parent = {
   id: number;
@@ -18,31 +17,7 @@ type Parent = {
   email?: string;
   address: string;
 };
-const columns = [
-  {
-    header: "Info",
-    accessor: "info",
-  },
-  {
-    header: "Student Names",
-    accessor: "students",
-    className: "hidden md:table-cell",
-  },
-  {
-    header: "Phone",
-    accessor: "phone",
-    className: "hidden lg:table-cell",
-  },
-  {
-    header: "Address",
-    accessor: "address",
-    className: "hidden lg:table-cell",
-  },
-  {
-    header: "Action",
-    accessor: "action",
-  },
-];
+
 function ParentListPage() {
   const [searchTerm, setSearchTerm] = useState('');
   const [currentPage, setCurrentPage] = useState(1);
@@ -74,31 +49,7 @@ function ParentListPage() {
     setCurrentPage(1);
   };
 
-  const renderRow = (item: Parent) => (
-    <tr
-      key={item.id}
-      className="border-b border-gray-600 even:bg-slate-50 text-sm hover:bg-green-300"
-    >
-      <td className="flex items-center gap-4 p-4 ">
-        <div className="flex flex-col ">
-          <h3 className="font-semibold">{item.name}</h3>
-          <p className="text-xs text-gray-500">{item?.email}</p>
-        </div>
-      </td>
-      <td className="hidden md:table-cell">{item.students.join(", ")}</td>
-      <td className="hidden md:table-cell">{item.phone}</td>
-      <td className="hidden md:table-cell">{item.address}</td>
-      <td>
-        <div className="flex items-center gap-2">
-          {role === "admin" ? (
-            <FormModdle table="parent" type="delete" id={item.id} data={item} />
-          ) : (
-            <span className="text-xs text-gray-400">Admin only</span>
-          )}
-        </div>
-      </td>
-    </tr>
-  );
+
   return (
     <div className="bg-white p-4 rounded-md flex-1 m-4 mt-0">
       {/*Top*/}
@@ -125,13 +76,69 @@ function ParentListPage() {
         </div>
       </div>
       {/* List */}
-      <Table columns={columns} renderRow={renderRow} data={currentParents} />
-      {/*Pagination*/}
-      <Pagination 
-        currentPage={currentPage}
-        totalPages={totalPages}
-        onPageChange={setCurrentPage}
-      />
+      <div className="rounded-md border mt-4">
+        <Table>
+          <TableHeader>
+            <TableRow>
+              <TableHead>Info</TableHead>
+              <TableHead className="hidden md:table-cell">Students</TableHead>
+              <TableHead className="hidden lg:table-cell">Phone</TableHead>
+              <TableHead className="hidden lg:table-cell">Address</TableHead>
+              <TableHead>Actions</TableHead>
+            </TableRow>
+          </TableHeader>
+          <TableBody>
+            {currentParents.map((parent) => (
+              <TableRow key={parent.id}>
+                <TableCell>
+                  <div>
+                    <div className="font-medium">{parent.name}</div>
+                    <div className="text-sm text-muted-foreground">{parent.email}</div>
+                  </div>
+                </TableCell>
+                <TableCell className="hidden md:table-cell">{parent.students.join(", ")}</TableCell>
+                <TableCell className="hidden lg:table-cell">{parent.phone}</TableCell>
+                <TableCell className="hidden lg:table-cell">{parent.address}</TableCell>
+                <TableCell>
+                  {role === "admin" && (
+                    <FormModdle table="parent" type="delete" id={parent.id} data={parent} />
+                  )}
+                </TableCell>
+              </TableRow>
+            ))}
+          </TableBody>
+        </Table>
+      </div>
+      
+      {/* Pagination */}
+      <div className="flex items-center justify-between space-x-2 py-4">
+        <div className="text-sm text-muted-foreground">
+          Showing {startIndex + 1} to {Math.min(startIndex + itemsPerPage, filteredAndSortedParents.length)} of {filteredAndSortedParents.length} parents
+        </div>
+        <div className="flex items-center space-x-2">
+          <Button
+            variant="outline"
+            size="sm"
+            onClick={() => setCurrentPage(prev => Math.max(prev - 1, 1))}
+            disabled={currentPage === 1}
+          >
+            <ChevronLeft className="h-4 w-4" />
+            Previous
+          </Button>
+          <div className="text-sm font-medium">
+            Page {currentPage} of {totalPages}
+          </div>
+          <Button
+            variant="outline"
+            size="sm"
+            onClick={() => setCurrentPage(prev => Math.min(prev + 1, totalPages))}
+            disabled={currentPage === totalPages}
+          >
+            Next
+            <ChevronRight className="h-4 w-4" />
+          </Button>
+        </div>
+      </div>
     </div>
   );
 }

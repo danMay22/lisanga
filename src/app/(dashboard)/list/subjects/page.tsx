@@ -1,29 +1,19 @@
 'use client';
 
-import Pagination from "@/components/Pagination";
-import Table from "@/components/Table";
 import TableSearch from "@/components/TableSearch";
 import { Button } from "@/components/ui/button";
+import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { subjectsData } from "@/lib/data";
 import Image from "next/image";
 import React, { useState, useMemo } from "react";
+import { ChevronLeft, ChevronRight } from "lucide-react";
 
 type Subject = {
   id: number;
   name: string;
   teachers: string[];
 };
-const columns = [
-  {
-    header: "Subject Name",
-    accessor: "name",
-  },
-  {
-    header: "Teachers",
-    accessor: "teachers",
-    className: "hidden md:table-cell",
-  },
-];
+
 function SubjectListPage() {
   const [searchTerm, setSearchTerm] = useState('');
   const [currentPage, setCurrentPage] = useState(1);
@@ -54,17 +44,7 @@ function SubjectListPage() {
     setCurrentPage(1);
   };
 
-  const renderRow = (item: Subject) => (
-    <tr
-      key={item.id}
-      className="border-b border-gray-600 even:bg-slate-50 text-sm hover:bg-green-300"
-    >
-      <td className="flex items-center gap-4 p-4 font-semibold">
-        {item.name}
-      </td>
-      <td className="hidden md:table-cell">{item.teachers.join(", ")}</td>
-    </tr>
-  );
+
   return (
     <div className="bg-white p-4 rounded-md flex-1 m-4 mt-0">
       {/*Top*/}
@@ -90,13 +70,54 @@ function SubjectListPage() {
         </div>
       </div>
       {/* List */}
-      <Table columns={columns} renderRow={renderRow} data={currentSubjects} />
-      {/*Pagination*/}
-      <Pagination 
-        currentPage={currentPage}
-        totalPages={totalPages}
-        onPageChange={setCurrentPage}
-      />
+      <div className="rounded-md border mt-4">
+        <Table>
+          <TableHeader>
+            <TableRow>
+              <TableHead>Subject Name</TableHead>
+              <TableHead className="hidden md:table-cell">Teachers</TableHead>
+            </TableRow>
+          </TableHeader>
+          <TableBody>
+            {currentSubjects.map((subject) => (
+              <TableRow key={subject.id}>
+                <TableCell className="font-medium">{subject.name}</TableCell>
+                <TableCell className="hidden md:table-cell">{subject.teachers.join(", ")}</TableCell>
+              </TableRow>
+            ))}
+          </TableBody>
+        </Table>
+      </div>
+      
+      {/* Pagination */}
+      <div className="flex items-center justify-between space-x-2 py-4">
+        <div className="text-sm text-muted-foreground">
+          Showing {startIndex + 1} to {Math.min(startIndex + itemsPerPage, filteredAndSortedSubjects.length)} of {filteredAndSortedSubjects.length} subjects
+        </div>
+        <div className="flex items-center space-x-2">
+          <Button
+            variant="outline"
+            size="sm"
+            onClick={() => setCurrentPage(prev => Math.max(prev - 1, 1))}
+            disabled={currentPage === 1}
+          >
+            <ChevronLeft className="h-4 w-4" />
+            Previous
+          </Button>
+          <div className="text-sm font-medium">
+            Page {currentPage} of {totalPages}
+          </div>
+          <Button
+            variant="outline"
+            size="sm"
+            onClick={() => setCurrentPage(prev => Math.min(prev + 1, totalPages))}
+            disabled={currentPage === totalPages}
+          >
+            Next
+            <ChevronRight className="h-4 w-4" />
+          </Button>
+        </div>
+      </div>
     </div>
   );
 }

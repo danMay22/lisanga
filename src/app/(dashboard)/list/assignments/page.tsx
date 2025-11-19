@@ -1,13 +1,14 @@
 'use client';
 
 import FormModdle from "@/components/FormModdle";
-import Pagination from "@/components/Pagination";
-import Table from "@/components/Table";
 import TableSearch from "@/components/TableSearch";
 import { Button } from "@/components/ui/button";
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
+import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { assignmentsData, role } from "@/lib/data";
 import Image from "next/image";
 import React, { useState, useMemo } from "react";
+import { ChevronLeft, ChevronRight } from "lucide-react";
 
 type Assignment = {
   id: number;
@@ -16,31 +17,7 @@ type Assignment = {
   teacher: string;
   dueDate: string;
 };
-const columns = [
-  {
-    header: "Subject",
-    accessor: "subject",
-  },
-  {
-    header: "Class",
-    accessor: "class",
-    className: "hidden md:table-cell",
-  },
-  {
-    header: "Teacher",
-    accessor: "teacher",
-    className: "hidden lg:table-cell",
-  },
-  {
-    header: "Due Date",
-    accessor: "dueDate",
-    className: "hidden lg:table-cell",
-  },
-  {
-    header: "Actions",
-    accessor: "action",
-  },
-];
+
 function AssignmentListPage() {
   const [searchTerm, setSearchTerm] = useState('');
   const [currentPage, setCurrentPage] = useState(1);
@@ -72,29 +49,7 @@ function AssignmentListPage() {
     setCurrentPage(1);
   };
 
-  const renderRow = (item: Assignment) => (
-    <tr
-      key={item.id}
-      className="border-b border-gray-600 even:bg-slate-50 text-sm hover:bg-green-300"
-    >
-      <td className="flex items-center gap-4 p-4 font-semibold">{item.subject}</td>
-      <td className="hidden md:table-cell">{item.class}</td>
-      <td className="hidden lg:table-cell">{item.teacher}</td>
-      <td className="hidden lg:table-cell">{item.dueDate}</td>
-      <td>
-        <div className="flex items-center gap-2">
-          {role === "admin" ? (
-            <>
-              <FormModdle table="assignment" type="update" data={item} />
-              <FormModdle table="assignment" type="delete" id={item.id} data={item} />
-            </>
-          ) : (
-            <span className="text-xs text-gray-400">Admin only</span>
-          )}
-        </div>
-      </td>
-    </tr>
-  );
+
   return (
     <div className="bg-white p-4 rounded-md flex-1 m-4 mt-0">
       {/*Top*/}
@@ -121,13 +76,101 @@ function AssignmentListPage() {
         </div>
       </div>
       {/* List */}
-      <Table columns={columns} renderRow={renderRow} data={currentAssignments} />
-      {/*Pagination*/}
-      <Pagination 
-        currentPage={currentPage}
-        totalPages={totalPages}
-        onPageChange={setCurrentPage}
-      />
+      <div className="rounded-md border mt-4">
+        <Table>
+          <TableHeader>
+            <TableRow>
+              <TableHead>Subject</TableHead>
+              <TableHead className="hidden md:table-cell">Class</TableHead>
+              <TableHead className="hidden lg:table-cell">Teacher</TableHead>
+              <TableHead className="hidden lg:table-cell">Due Date</TableHead>
+              <TableHead>Actions</TableHead>
+            </TableRow>
+          </TableHeader>
+          <TableBody>
+            {currentAssignments.map((assignment) => (
+              <TableRow key={assignment.id}>
+                <TableCell className="font-medium">{assignment.subject}</TableCell>
+                <TableCell className="hidden md:table-cell">{assignment.class}</TableCell>
+                <TableCell className="hidden lg:table-cell">{assignment.teacher}</TableCell>
+                <TableCell className="hidden lg:table-cell">{assignment.dueDate}</TableCell>
+                <TableCell>
+                  <div className="flex items-center gap-2">
+                    <Dialog>
+                      <DialogTrigger asChild>
+                        <Button variant="outline" size="sm">
+                          View
+                        </Button>
+                      </DialogTrigger>
+                      <DialogContent className="max-w-2xl">
+                        <DialogHeader>
+                          <DialogTitle>Assignment Information</DialogTitle>
+                        </DialogHeader>
+                        <div className="grid gap-6">
+                          <div className="grid grid-cols-2 gap-4">
+                            <div>
+                              <label className="text-sm font-medium text-muted-foreground">Subject</label>
+                              <p className="font-medium">{assignment.subject}</p>
+                            </div>
+                            <div>
+                              <label className="text-sm font-medium text-muted-foreground">Class</label>
+                              <p className="font-medium">{assignment.class}</p>
+                            </div>
+                            <div>
+                              <label className="text-sm font-medium text-muted-foreground">Teacher</label>
+                              <p className="font-medium">{assignment.teacher}</p>
+                            </div>
+                            <div>
+                              <label className="text-sm font-medium text-muted-foreground">Due Date</label>
+                              <p className="font-medium">{assignment.dueDate}</p>
+                            </div>
+                          </div>
+                        </div>
+                      </DialogContent>
+                    </Dialog>
+                    {role === "admin" && (
+                      <>
+                        <FormModdle table="assignment" type="update" data={assignment} />
+                        <FormModdle table="assignment" type="delete" id={assignment.id} data={assignment} />
+                      </>
+                    )}
+                  </div>
+                </TableCell>
+              </TableRow>
+            ))}
+          </TableBody>
+        </Table>
+      </div>
+      
+      {/* Pagination */}
+      <div className="flex items-center justify-between space-x-2 py-4">
+        <div className="text-sm text-muted-foreground">
+          Showing {startIndex + 1} to {Math.min(startIndex + itemsPerPage, filteredAndSortedAssignments.length)} of {filteredAndSortedAssignments.length} assignments
+        </div>
+        <div className="flex items-center space-x-2">
+          <Button
+            variant="outline"
+            size="sm"
+            onClick={() => setCurrentPage(prev => Math.max(prev - 1, 1))}
+            disabled={currentPage === 1}
+          >
+            <ChevronLeft className="h-4 w-4" />
+            Previous
+          </Button>
+          <div className="text-sm font-medium">
+            Page {currentPage} of {totalPages}
+          </div>
+          <Button
+            variant="outline"
+            size="sm"
+            onClick={() => setCurrentPage(prev => Math.min(prev + 1, totalPages))}
+            disabled={currentPage === totalPages}
+          >
+            Next
+            <ChevronRight className="h-4 w-4" />
+          </Button>
+        </div>
+      </div>
     </div>
   );
 }

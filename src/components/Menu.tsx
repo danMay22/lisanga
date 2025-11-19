@@ -119,6 +119,8 @@ import Link from "next/link";
 
 
 function Menu() {
+  const newAnnouncementsCount = 3;
+
   return (
     <div className="border-b border-[radial-gradient(ellipse_at_bottom,_var(--tw-gradient-stops))] from-[#48cae4] to-[#023e8a]  dark:border-gray-600 mt-4 text-sm bg-white dark:bg-gray-900 ">
       {menuItems.map((i) => (
@@ -129,19 +131,26 @@ function Menu() {
                 <Link
                   href={item.href}
                   key={item.label}
-                  className="flex items-center justify-center lg:justify-start gap-4 text-gray-600 md:px-2 py-2 rounded-md scale-110 transition-all duration-300 hover:scale-100 relative group"
+                  className="flex items-center justify-center md:justify-start gap-4 text-gray-600 md:px-2 py-2 rounded-md scale-110 transition-all duration-300 hover:scale-100 relative group"
                 >
-                  <Image
-                    src={item.icon}
-                    alt="icon"
-                    width={25}
-                    height={25}
-                    className="aspect-square rounded-lg "
-                  />
-                  <span className="hidden lg:block text-gray-700 font-bold capitalize">
+                  <div className="relative">
+                    <Image
+                      src={item.icon}
+                      alt="icon"
+                      width={25}
+                      height={25}
+                      className="aspect-square rounded-lg "
+                    />
+                    {item.label === "announcements" && newAnnouncementsCount > 0 && (
+                      <span className="absolute -top-2 -right-2 bg-red-500 text-white text-xs rounded-full h-5 w-5 flex items-center justify-center animate-pulse">
+                        {newAnnouncementsCount}
+                      </span>
+                    )}
+                  </div>
+                  <span className="hidden md:block text-gray-700 font-bold capitalize">
                     {item.label}
                   </span>
-                  <span className="absolute left-12 bg-gray-800 text-white text-xs rounded px-2 py-1 opacity-0 group-hover:opacity-100 transition-opacity lg:hidden whitespace-nowrap z-10">
+                  <span className="absolute left-12 bg-gray-800 text-white text-xs rounded px-2 py-1 opacity-0 group-hover:opacity-100 transition-opacity md:hidden whitespace-nowrap z-10">
                     {item.label}
                   </span>
                 </Link>

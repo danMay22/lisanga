@@ -21,6 +21,7 @@ export const translations = {
     announcements: "Announcements",
     
     // Common
+    search: "Search...",
     total: "Total",
     present: "Present",
     absent: "Absent",
@@ -63,7 +64,6 @@ export const translations = {
     individual: "Individual",
     
     // Attendance
-    teacher: "Teacher",
     updated: "Updated Attendance",
     pending: "Pending",
     notUpdated: "Not Updated"
@@ -90,6 +90,7 @@ export const translations = {
     announcements: "Annonces",
     
     // Common
+    search: "Rechercher...",
     total: "Total",
     present: "Présent",
     absent: "Absent",
@@ -132,7 +133,6 @@ export const translations = {
     individual: "Individuel",
     
     // Attendance
-    teacher: "Professeur",
     updated: "Présence Mise à Jour",
     pending: "En Attente",
     notUpdated: "Non Mis à Jour"

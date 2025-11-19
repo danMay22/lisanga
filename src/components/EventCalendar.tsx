@@ -53,11 +53,13 @@ function EventCalendar() {
 
   return (
     <div className="bg-white p-4 rounded-md">
-      <div className="flex justify-between items-center mb-4">
+      <div className="mb-6">
         <Calendar onChange={onChange} value={value} />
+      </div>
+      <div className="flex justify-center mb-4">
         <button 
           onClick={() => setShowAddModal(true)}
-          className="px-2 py-1 text-sm bg-blue-600 text-white rounded hover:bg-blue-700"
+          className="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700"
         >
           Add Event
         </button>

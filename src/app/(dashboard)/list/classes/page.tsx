@@ -1,13 +1,12 @@
 'use client';
 
-
-import Pagination from "@/components/Pagination";
-import Table from "@/components/Table";
 import TableSearch from "@/components/TableSearch";
 import { Button } from "@/components/ui/button";
-import { classesData, role } from "@/lib/data";
+import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
+import { classesData } from "@/lib/data";
 import Image from "next/image";
 import React, { useState, useMemo } from "react";
+import { ChevronLeft, ChevronRight } from "lucide-react";
 
 type Class = {
   id: number;
@@ -16,31 +15,7 @@ type Class = {
   grade: number;
   supervisor: string;
 };
-const columns = [
-  {
-    header: "Class Name",
-    accessor: "name",
-  },
-  {
-    header: "Capacity",
-    accessor: "capacity",
-    className: "hidden md:table-cell",
-  },
-  {
-    header: "Grade",
-    accessor: "grade",
-    className: "hidden md:table-cell",
-  },
-  {
-    header: "Supervisor",
-    accessor: "supervisor",
-    className: "hidden md:table-cell",
-  },
-  {
-    header: "Actions",
-    accessor: "action",
-  },
-];
+
 function ClassListPage() {
   const [searchTerm, setSearchTerm] = useState('');
   const [currentPage, setCurrentPage] = useState(1);
@@ -71,20 +46,7 @@ function ClassListPage() {
     setCurrentPage(1);
   };
 
-  const renderRow = (item: Class) => (
-    <tr
-      key={item.id}
-      className="border-b border-gray-600 even:bg-slate-50 text-sm hover:bg-green-300"
-    >
-      <td className="flex items-center gap-4 p-4 font-semibold">{item.name}</td>
-      <td className="hidden md:table-cell">{item.capacity}</td>
-      <td className="hidden md:table-cell">{item.grade}</td>
-      <td className="hidden md:table-cell">{item.supervisor}</td>
-      <td>
 
-      </td>
-    </tr>
-  );
   return (
     <div className="bg-white p-4 rounded-md flex-1 m-4 mt-0">
       {/*Top*/}
@@ -111,13 +73,58 @@ function ClassListPage() {
         </div>
       </div>
       {/* List */}
-      <Table columns={columns} renderRow={renderRow} data={currentClasses} />
-      {/*Pagination*/}
-      <Pagination 
-        currentPage={currentPage}
-        totalPages={totalPages}
-        onPageChange={setCurrentPage}
-      />
+      <div className="rounded-md border mt-4">
+        <Table>
+          <TableHeader>
+            <TableRow>
+              <TableHead>Class Name</TableHead>
+              <TableHead className="hidden md:table-cell">Capacity</TableHead>
+              <TableHead className="hidden md:table-cell">Grade</TableHead>
+              <TableHead className="hidden md:table-cell">Supervisor</TableHead>
+            </TableRow>
+          </TableHeader>
+          <TableBody>
+            {currentClasses.map((classItem) => (
+              <TableRow key={classItem.id}>
+                <TableCell className="font-medium">{classItem.name}</TableCell>
+                <TableCell className="hidden md:table-cell">{classItem.capacity}</TableCell>
+                <TableCell className="hidden md:table-cell">{classItem.grade}</TableCell>
+                <TableCell className="hidden md:table-cell">{classItem.supervisor}</TableCell>
+              </TableRow>
+            ))}
+          </TableBody>
+        </Table>
+      </div>
+      
+      {/* Pagination */}
+      <div className="flex items-center justify-between space-x-2 py-4">
+        <div className="text-sm text-muted-foreground">
+          Showing {startIndex + 1} to {Math.min(startIndex + itemsPerPage, filteredAndSortedClasses.length)} of {filteredAndSortedClasses.length} classes
+        </div>
+        <div className="flex items-center space-x-2">
+          <Button
+            variant="outline"
+            size="sm"
+            onClick={() => setCurrentPage(prev => Math.max(prev - 1, 1))}
+            disabled={currentPage === 1}
+          >
+            <ChevronLeft className="h-4 w-4" />
+            Previous
+          </Button>
+          <div className="text-sm font-medium">
+            Page {currentPage} of {totalPages}
+          </div>
+          <Button
+            variant="outline"
+            size="sm"
+            onClick={() => setCurrentPage(prev => Math.min(prev + 1, totalPages))}
+            disabled={currentPage === totalPages}
+          >
+            Next
+            <ChevronRight className="h-4 w-4" />
+          </Button>
+        </div>
+      </div>
     </div>
   );
 }

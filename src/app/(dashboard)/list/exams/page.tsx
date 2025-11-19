@@ -1,13 +1,13 @@
 'use client';
 
 import FormModdle from "@/components/FormModdle";
-import Pagination from "@/components/Pagination";
-import Table from "@/components/Table";
 import TableSearch from "@/components/TableSearch";
 import { Button } from "@/components/ui/button";
+import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { examsData, role } from "@/lib/data";
 import Image from "next/image";
 import React, { useState, useMemo } from "react";
+import { ChevronLeft, ChevronRight } from "lucide-react";
 
 type Exam = {
   id: number;
@@ -16,31 +16,7 @@ type Exam = {
   teacher: string;
   date: string;
 };
-const columns = [
-  {
-    header: "Subject",
-    accessor: "subject",
-  },
-  {
-    header: "Class",
-    accessor: "class",
-    className: "hidden md:table-cell",
-  },
-  {
-    header: "Teacher",
-    accessor: "teacher",
-    className: "hidden lg:table-cell",
-  },
-  {
-    header: "Date",
-    accessor: "date",
-    className: "hidden lg:table-cell",
-  },
-  {
-    header: "Actions",
-    accessor: "action",
-  },
-];
+
 function ExamListPage() {
   const [searchTerm, setSearchTerm] = useState('');
   const [currentPage, setCurrentPage] = useState(1);
@@ -72,29 +48,7 @@ function ExamListPage() {
     setCurrentPage(1);
   };
 
-  const renderRow = (item: Exam) => (
-    <tr
-      key={item.id}
-      className="border-b border-gray-600 even:bg-slate-50 text-sm hover:bg-green-300"
-    >
-      <td className="flex items-center gap-4 p-4 font-semibold">{item.subject}</td>
-      <td className="hidden md:table-cell">{item.class}</td>
-      <td className="hidden lg:table-cell">{item.teacher}</td>
-      <td className="hidden lg:table-cell">{item.date}</td>
-      <td>
-        <div className="flex items-center gap-2">
-          {role === "admin" ? (
-            <>
-              <FormModdle table="exam" type="update" data={item} />
-              <FormModdle table="exam" type="delete" id={item.id} data={item} />
-            </>
-          ) : (
-            <span className="text-xs text-gray-400">Admin only</span>
-          )}
-        </div>
-      </td>
-    </tr>
-  );
+
   return (
     <div className="bg-white p-4 rounded-md flex-1 m-4 mt-0">
       {/*Top*/}
@@ -121,13 +75,69 @@ function ExamListPage() {
         </div>
       </div>
       {/* List */}
-      <Table columns={columns} renderRow={renderRow} data={currentExams} />
-      {/*Pagination*/}
-      <Pagination 
-        currentPage={currentPage}
-        totalPages={totalPages}
-        onPageChange={setCurrentPage}
-      />
+      <div className="rounded-md border mt-4">
+        <Table>
+          <TableHeader>
+            <TableRow>
+              <TableHead>Subject</TableHead>
+              <TableHead className="hidden md:table-cell">Class</TableHead>
+              <TableHead className="hidden lg:table-cell">Teacher</TableHead>
+              <TableHead className="hidden lg:table-cell">Date</TableHead>
+              <TableHead>Actions</TableHead>
+            </TableRow>
+          </TableHeader>
+          <TableBody>
+            {currentExams.map((exam) => (
+              <TableRow key={exam.id}>
+                <TableCell className="font-medium">{exam.subject}</TableCell>
+                <TableCell className="hidden md:table-cell">{exam.class}</TableCell>
+                <TableCell className="hidden lg:table-cell">{exam.teacher}</TableCell>
+                <TableCell className="hidden lg:table-cell">{exam.date}</TableCell>
+                <TableCell>
+                  <div className="flex items-center gap-2">
+                    {role === "admin" && (
+                      <>
+                        <FormModdle table="exam" type="update" data={exam} />
+                        <FormModdle table="exam" type="delete" id={exam.id} data={exam} />
+                      </>
+                    )}
+                  </div>
+                </TableCell>
+              </TableRow>
+            ))}
+          </TableBody>
+        </Table>
+      </div>
+      
+      {/* Pagination */}
+      <div className="flex items-center justify-between space-x-2 py-4">
+        <div className="text-sm text-muted-foreground">
+          Showing {startIndex + 1} to {Math.min(startIndex + itemsPerPage, filteredAndSortedExams.length)} of {filteredAndSortedExams.length} exams
+        </div>
+        <div className="flex items-center space-x-2">
+          <Button
+            variant="outline"
+            size="sm"
+            onClick={() => setCurrentPage(prev => Math.max(prev - 1, 1))}
+            disabled={currentPage === 1}
+          >
+            <ChevronLeft className="h-4 w-4" />
+            Previous
+          </Button>
+          <div className="text-sm font-medium">
+            Page {currentPage} of {totalPages}
+          </div>
+          <Button
+            variant="outline"
+            size="sm"
+            onClick={() => setCurrentPage(prev => Math.min(prev + 1, totalPages))}
+            disabled={currentPage === totalPages}
+          >
+            Next
+            <ChevronRight className="h-4 w-4" />
+          </Button>
+        </div>
+      </div>
     </div>
   );
 }

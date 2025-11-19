@@ -1,78 +1,67 @@
 import React from "react";
 import { Button } from "../ui/button";
-import Image from "next/image";
+import { BookOpen, Calendar, User } from "lucide-react";
 
 export default function Blogs() {
   return (
-    <section className="bg-white dark:bg-gray-900">
-      <div className="container px-6 py-10 mx-auto">
-        <div className="text-center">
-          <h1 className="text-2xl font-semibold text-gray-800 capitalize lg:text-3xl dark:text-white">
-           Articles: Guide pour Etudiants & Eleves
-          </h1>
-          <p className="max-w-lg mx-auto mt-4 text-gray-500">
-            Ici, trouve nos meilleurs eleves et,ou nos profs conseilles sur ton parcours et apprend leurs technique pour une meilleur et facile comprehension de tes sujets. 
-          </p>
-          <Button className="inline-flex items-center px-4 py-2 mt-4 font-medium  text-white hover:bg-blue-700"
-            >
-            <a
-              href="#"
-             >
-              Lire
-            </a>
-          </Button>
-        </div>
-
-        <div className="grid grid-cols-1 gap-8 mt-8 lg:grid-cols-2">
-          <div>
-            <Image
-              className="relative z-10 object-cover w-full rounded-md h-96"
-              src="https://images.unsplash.com/photo-1644018335954-ab54c83e007f?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80"
-              alt=""
-              width={200}
-              height={200}
-            />
-
-            <div className="relative z-20 max-w-lg p-6 mx-auto -mt-20 bg-white rounded-md shadow dark:bg-gray-900">
-              <a
-                href="/"
-                className="font-semibold text-gray-800 hover:underline dark:text-white md:text-xl"
-              >
-                QUOI, OU et COMMENT utiliser l&apos;internet comme aide pour mes etudes.
-               
-              </a>
-
-              <p className="mt-3 text-sm text-gray-500 dark:text-gray-300 md:text-sm">
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Iure
-                veritatis sint autem nesciunt, laudantium quia tempore delect
-              </p>
-
-              <p className="mt-3 text-sm text-blue-500">21 October 2019</p>
+    <section className="bg-white py-8 antialiased dark:bg-gray-900 md:py-16">
+      <div className="mx-auto max-w-screen-xl px-4 2xl:px-0">
+        <h2 className="text-xl font-semibold text-gray-900 dark:text-white sm:text-2xl mb-2">
+          Articles: Guide pour Etudiants & Eleves
+        </h2>
+        <p className="text-gray-500 dark:text-gray-400 mb-6">
+          Ici, trouve nos meilleurs eleves et,ou nos profs conseilles sur ton parcours et apprend leurs technique pour une meilleur et facile comprehension de tes sujets.
+        </p>
+        
+        <div className="mt-6 sm:mt-8 lg:flex lg:gap-8">
+          <div className="w-full divide-y divide-gray-200 overflow-hidden rounded-lg border border-gray-200 dark:divide-gray-700 dark:border-gray-700">
+            
+            <div className="space-y-4 p-6">
+              <div className="flex items-center gap-6">
+                <div className="h-14 w-14 shrink-0 flex items-center justify-center rounded-lg bg-blue-100 dark:bg-blue-900">
+                  <BookOpen className="h-6 w-6 text-blue-600 dark:text-blue-400" />
+                </div>
+                <a href="/blog" className="min-w-0 flex-1 font-medium text-gray-900 hover:underline dark:text-white">
+                  QUOI, OU et COMMENT utiliser l'internet comme aide pour mes etudes.
+                </a>
+              </div>
+              <div className="flex items-center justify-between gap-4">
+                <p className="text-sm font-normal text-gray-500 dark:text-gray-400">
+                  Lorem ipsum dolor sit amet consectetur adipisicing elit. Iure veritatis sint autem nesciunt, laudantium quia tempore delect
+                </p>
+                <div className="flex items-center gap-2 text-sm text-gray-500 dark:text-gray-400">
+                  <Calendar className="h-4 w-4" />
+                  21 October 2019
+                </div>
+              </div>
             </div>
-          </div>
 
-          <div>
-            <Image
-              className="relative z-10 object-cover w-full rounded-md h-96"
-              src="https://images.unsplash.com/photo-1497032628192-86f99bcd76bc?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80"
-              alt=""
-              width={200}
-              height={200}
-            />
+            <div className="space-y-4 p-6">
+              <div className="flex items-center gap-6">
+                <div className="h-14 w-14 shrink-0 flex items-center justify-center rounded-lg bg-green-100 dark:bg-green-900">
+                  <User className="h-6 w-6 text-green-600 dark:text-green-400" />
+                </div>
+                <a href="/blog" className="min-w-0 flex-1 font-medium text-gray-900 hover:underline dark:text-white">
+                  Se Preparer pour mes Examen.
+                </a>
+              </div>
+              <div className="flex items-center justify-between gap-4">
+                <p className="text-sm font-normal text-gray-500 dark:text-gray-400">
+                  Lorem ipsum dolor sit amet consectetur adipisicing elit. Iure veritatis sint autem nesciunt, laudantium quia tempore delect
+                </p>
+                <div className="flex items-center gap-2 text-sm text-gray-500 dark:text-gray-400">
+                  <Calendar className="h-4 w-4" />
+                  20 October 2019
+                </div>
+              </div>
+            </div>
 
-            <div className="relative z-20 max-w-lg p-6 mx-auto -mt-20 bg-white rounded-md shadow dark:bg-gray-900">
-              <a
-                href="/"
-                className="font-semibold text-gray-800 hover:underline dark:text-white md:text-xl"
-              >
-               Se Preparer pour mes Examen.
-              </a>
-
-              <p className="mt-3 text-sm text-gray-500 dark:text-gray-300 md:text-sm">
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Iure
-                veritatis sint autem nesciunt, laudantium quia tempore delect
-              </p>
-              <p className="mt-3 text-sm text-blue-500">20 October 2019</p>
+            <div className="space-y-4 bg-gray-50 p-6 dark:bg-gray-800">
+              <div className="flex items-center justify-center">
+                <Button className="w-full rounded-lg bg-primary-700 px-5 py-2.5 text-sm font-medium text-white hover:bg-primary-800">
+                  <a href="/blog">Lire Plus d'Articles</a>
+                </Button>
+              </div>
             </div>
           </div>
         </div>

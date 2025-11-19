@@ -10,28 +10,32 @@ const events = [
     title: "Fin D'annee Scolaire",
     time: "09:00AM - 2:00PM",
     description: "2 Juin 2025, constitue la derniere journee de notre programme, cette annee et comme par coutume nous vous invintons...",
-    type: "event"
+    type: "event",
+    image: "/img/pexels-gregory-vanhuyse-2150354808-31096183.jpg"
   },
   {
     id: 2,
     title: "Parent-eleve",
     time: "10:00AM - 2:00PM",
     description: "Un jour de l'annee ou chaque parent peut experimente notre structure scolaire, apprendre des nouvelles ou visiter l'enviroment de son enfant.",
-    type: "event"
+    type: "event",
+    image: "/img/pexels-mary-taylor-5896493.jpg"
   },
   {
     id: 3,
     title: "Orientation: pour Examen d'Etat pour la 6em Math Physique.",
     date: "2025/05/19",
     description: "Chaque eleve des 6em Math-Physique doivent se rendre a la salle de classe 56, ce vendredi 23 May a 14h pour l'orientation a l'examen d'Etat.",
-    type: "announcement"
+    type: "announcement",
+    image: "/img/pexels-bwalya-marcel-ngosa-2381292-6368521.jpg"
   },
   {
     id: 4,
     title: "Livre a vendre",
     date: "2025-05-03",
     description: "Pour tous ceux en manque des livres de Math, Physique et Geo... veillent contacter chef de Classe Mbuyi Clarrisse de la 5 em Bio-Chimie.",
-    type: "announcement"
+    type: "announcement",
+    image: "/img/pexels-neosiam-618116.jpg"
   }
 ];
 
@@ -53,7 +57,9 @@ export default function EventsPage() {
               <h2 className="text-2xl font-semibold mb-4">Events</h2>
               <div className="grid gap-4">
                 {events.filter(item => item.type === 'event').map((event) => (
-                  <div key={event.id} className="block p-6 border border-gray-200 rounded-lg shadow-sm hover:bg-gray-50 transition-colors">
+                  <div key={event.id} className="flex border border-gray-200 rounded-lg shadow-sm hover:bg-gray-50 transition-colors overflow-hidden">
+                    <img src={event.image} alt={event.title} className="w-48 h-32 object-cover" />
+                    <div className="p-6 flex-1">
                     <div className="flex items-start justify-between mb-2">
                       <h5 className="text-xl font-bold tracking-tight text-gray-900">{event.title}</h5>
                       <DropdownMenu>
@@ -81,7 +87,8 @@ export default function EventsPage() {
                       </DropdownMenu>
                     </div>
                     <div className="text-sm text-gray-500 mb-2">{event.time}</div>
-                    <p className="font-normal text-gray-700">{event.description}</p>
+                      <p className="font-normal text-gray-700">{event.description}</p>
+                    </div>
                   </div>
                 ))}
               </div>
@@ -91,7 +98,9 @@ export default function EventsPage() {
               <h2 className="text-2xl font-semibold mb-4">Announcements</h2>
               <div className="grid gap-4">
                 {events.filter(item => item.type === 'announcement').map((announcement) => (
-                  <div key={announcement.id} className="block p-6 border border-gray-200 rounded-lg shadow-sm hover:bg-gray-50 transition-colors">
+                  <div key={announcement.id} className="flex border border-gray-200 rounded-lg shadow-sm hover:bg-gray-50 transition-colors overflow-hidden">
+                    <img src={announcement.image} alt={announcement.title} className="w-48 h-32 object-cover" />
+                    <div className="p-6 flex-1">
                     <div className="flex items-start justify-between mb-2">
                       <h5 className="text-xl font-bold tracking-tight text-gray-900">{announcement.title}</h5>
                       <DropdownMenu>
@@ -119,7 +128,8 @@ export default function EventsPage() {
                       </DropdownMenu>
                     </div>
                     <div className="text-sm text-gray-500 mb-2">{announcement.date}</div>
-                    <p className="font-normal text-gray-700">{announcement.description}</p>
+                      <p className="font-normal text-gray-700">{announcement.description}</p>
+                    </div>
                   </div>
                 ))}
               </div>

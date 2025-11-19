@@ -10,7 +10,7 @@ export default function TeacherAttendance() {
   
   const teacherAttendanceStats = useMemo(() => {
     const todayRecords = attendanceData.filter(record => record.date === today);
-    const presentTeachers = todayRecords.filter(record => record.teacherPresent).length;
+    const presentTeachers = todayRecords.length; // Assume if there's a record, teacher is present
     const totalTeachers = teachersData.length;
     const absentTeachers = totalTeachers - presentTeachers;
     
@@ -30,7 +30,7 @@ export default function TeacherAttendance() {
       return {
         ...teacher,
         hasUpdatedAttendance: !!todayRecord,
-        isPresent: todayRecord?.teacherPresent || false
+        isPresent: !!todayRecord // If there's a record, assume teacher is present
       };
     });
   }, [today]);

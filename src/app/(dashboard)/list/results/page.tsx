@@ -1,13 +1,14 @@
 'use client';
 
 import FormModdle from "@/components/FormModdle";
-import Pagination from "@/components/Pagination";
-import Table from "@/components/Table";
 import TableSearch from "@/components/TableSearch";
 import { Button } from "@/components/ui/button";
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
+import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { resultsData, role } from "@/lib/data";
 import Image from "next/image";
 import React, { useState, useMemo } from "react";
+import { ChevronLeft, ChevronRight } from "lucide-react";
 
 type Result = {
   id: number;
@@ -19,31 +20,7 @@ type Result = {
   date: string;
   score: number;
 };
-const columns = [
-  {
-    header: "Subject",
-    accessor: "subject",
-  },
-  {
-    header: "Student",
-    accessor: "student",
-    className: "hidden md:table-cell",
-  },
-  {
-    header: "Score",
-    accessor: "score",
-    className: "hidden lg:table-cell",
-  },
-  {
-    header: "Class",
-    accessor: "class",
-    className: "hidden lg:table-cell",
-  },
-  {
-    header: "Actions",
-    accessor: "action",
-  },
-];
+
 function ResultListPage() {
   const [searchTerm, setSearchTerm] = useState('');
   const [currentPage, setCurrentPage] = useState(1);
@@ -75,29 +52,7 @@ function ResultListPage() {
     setCurrentPage(1);
   };
 
-  const renderRow = (item: Result) => (
-    <tr
-      key={item.id}
-      className="border-b border-gray-600 even:bg-slate-50 text-sm hover:bg-green-300"
-    >
-      <td className="flex items-center gap-4 p-4 font-semibold">{item.subject}</td>
-      <td className="hidden md:table-cell">{item.student}</td>
-      <td className="hidden lg:table-cell">{item.score}/100</td>
-      <td className="hidden lg:table-cell">{item.class}</td>
-      <td>
-        <div className="flex items-center gap-2">
-          {role === "admin" ? (
-            <>
-              <FormModdle table="result" type="update" data={item} />
-              <FormModdle table="result" type="delete" id={item.id} data={item} />
-            </>
-          ) : (
-            <span className="text-xs text-gray-400">Admin only</span>
-          )}
-        </div>
-      </td>
-    </tr>
-  );
+
   return (
     <div className="bg-white p-4 rounded-md flex-1 m-4 mt-0">
       {/*Top*/}
@@ -124,13 +79,133 @@ function ResultListPage() {
         </div>
       </div>
       {/* List */}
-      <Table columns={columns} renderRow={renderRow} data={currentResults} />
-      {/*Pagination*/}
-      <Pagination 
-        currentPage={currentPage}
-        totalPages={totalPages}
-        onPageChange={setCurrentPage}
-      />
+      <div className="rounded-md border mt-4">
+        <Table>
+          <TableHeader>
+            <TableRow>
+              <TableHead>Subject</TableHead>
+              <TableHead className="hidden md:table-cell">Student</TableHead>
+              <TableHead className="hidden lg:table-cell">Score</TableHead>
+              <TableHead className="hidden lg:table-cell">Class</TableHead>
+              <TableHead>Actions</TableHead>
+            </TableRow>
+          </TableHeader>
+          <TableBody>
+            {currentResults.map((result) => (
+              <TableRow key={result.id}>
+                <TableCell className="font-medium">{result.subject}</TableCell>
+                <TableCell className="hidden md:table-cell">{result.student}</TableCell>
+                <TableCell className="hidden lg:table-cell">
+                  <span className={`font-medium ${
+                    result.score >= 80 ? 'text-green-600' : 
+                    result.score >= 60 ? 'text-yellow-600' : 'text-red-600'
+                  }`}>
+                    {result.score}/100
+                  </span>
+                </TableCell>
+                <TableCell className="hidden lg:table-cell">{result.class}</TableCell>
+                <TableCell>
+                  <div className="flex items-center gap-2">
+                    <Dialog>
+                      <DialogTrigger asChild>
+                        <Button variant="outline" size="sm">
+                          View
+                        </Button>
+                      </DialogTrigger>
+                      <DialogContent className="max-w-2xl">
+                        <DialogHeader>
+                          <DialogTitle>Result Information</DialogTitle>
+                        </DialogHeader>
+                        <div className="grid gap-6">
+                          <div className="grid grid-cols-2 gap-4">
+                            <div>
+                              <label className="text-sm font-medium text-muted-foreground">Subject</label>
+                              <p className="font-medium">{result.subject}</p>
+                            </div>
+                            <div>
+                              <label className="text-sm font-medium text-muted-foreground">Student</label>
+                              <p className="font-medium">{result.student}</p>
+                            </div>
+                            <div>
+                              <label className="text-sm font-medium text-muted-foreground">Class</label>
+                              <p className="font-medium">{result.class}</p>
+                            </div>
+                            <div>
+                              <label className="text-sm font-medium text-muted-foreground">Teacher</label>
+                              <p className="font-medium">{result.teacher}</p>
+                            </div>
+                            <div>
+                              <label className="text-sm font-medium text-muted-foreground">Type</label>
+                              <p className="font-medium capitalize">{result.type}</p>
+                            </div>
+                            <div>
+                              <label className="text-sm font-medium text-muted-foreground">Date</label>
+                              <p className="font-medium">{result.date}</p>
+                            </div>
+                            <div className="col-span-2">
+                              <label className="text-sm font-medium text-muted-foreground">Score</label>
+                              <div className="flex items-center gap-2">
+                                <span className={`text-2xl font-bold ${
+                                  result.score >= 80 ? 'text-green-600' : 
+                                  result.score >= 60 ? 'text-yellow-600' : 'text-red-600'
+                                }`}>
+                                  {result.score}/100
+                                </span>
+                                <span className={`px-2 py-1 rounded-full text-xs font-medium ${
+                                  result.score >= 80 ? 'bg-green-100 text-green-800' : 
+                                  result.score >= 60 ? 'bg-yellow-100 text-yellow-800' : 'bg-red-100 text-red-800'
+                                }`}>
+                                  {result.score >= 80 ? 'Excellent' : result.score >= 60 ? 'Good' : 'Needs Improvement'}
+                                </span>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </DialogContent>
+                    </Dialog>
+                    {role === "admin" && (
+                      <>
+                        <FormModdle table="result" type="update" data={result} />
+                        <FormModdle table="result" type="delete" id={result.id} data={result} />
+                      </>
+                    )}
+                  </div>
+                </TableCell>
+              </TableRow>
+            ))}
+          </TableBody>
+        </Table>
+      </div>
+      
+      {/* Pagination */}
+      <div className="flex items-center justify-between space-x-2 py-4">
+        <div className="text-sm text-muted-foreground">
+          Showing {startIndex + 1} to {Math.min(startIndex + itemsPerPage, filteredAndSortedResults.length)} of {filteredAndSortedResults.length} results
+        </div>
+        <div className="flex items-center space-x-2">
+          <Button
+            variant="outline"
+            size="sm"
+            onClick={() => setCurrentPage(prev => Math.max(prev - 1, 1))}
+            disabled={currentPage === 1}
+          >
+            <ChevronLeft className="h-4 w-4" />
+            Previous
+          </Button>
+          <div className="text-sm font-medium">
+            Page {currentPage} of {totalPages}
+          </div>
+          <Button
+            variant="outline"
+            size="sm"
+            onClick={() => setCurrentPage(prev => Math.min(prev + 1, totalPages))}
+            disabled={currentPage === totalPages}
+          >
+            Next
+            <ChevronRight className="h-4 w-4" />
+          </Button>
+        </div>
+      </div>
     </div>
   );
 }

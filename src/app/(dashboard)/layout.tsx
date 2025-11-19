@@ -1,26 +1,39 @@
-import Menu from "@/components/Menu";
-import { Header } from "@/components/home/Header";
-import Image from "next/image";
-import Link from "next/link";
+"use client"
+
+import { useEffect } from 'react';
+import { useRouter } from 'next/navigation';
+import { useAuth } from '@/contexts/AuthContext';
+import { ModernSidebar } from "@/components/modern-sidebar"
 
 export default function DashboardLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
-  return (
-    <div>
-      <Header />
-      <div className="pt-16 h-screen flex">
-        {/* LEFT - Sidebar */}
-        <div className="w-[14%] md:w-[8%] lg:w-[16%] xl:w-[14%] p-4">
-          <Menu />
-        </div>
-        {/* RIGHT - Content */}
-        <div className="w-[86%] md:w-[92%] lg:w-[84%] xl:w-[86%] bg-[#F7F8FA] overflow-scroll">
-          {children}
-        </div>
+  const { user, isLoading } = useAuth();
+  const router = useRouter();
+
+  useEffect(() => {
+    if (!isLoading && !user) {
+      router.push('/login');
+    }
+  }, [user, isLoading, router]);
+
+  if (isLoading) {
+    return (
+      <div className="flex items-center justify-center min-h-screen">
+        <div className="text-lg">Loading...</div>
       </div>
-    </div>
-  );
+    );
+  }
+
+  if (!user) {
+    return null;
+  }
+
+  return (
+    <ModernSidebar>
+      {children}
+    </ModernSidebar>
+  )
 }

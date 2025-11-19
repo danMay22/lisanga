@@ -8,8 +8,7 @@ export const teachersData = [
     teacherId: "1234567890",
     name: "John Doe",
     email: "john@doe.com",
-    photo:
-      "https://images.pexels.com/photos/2888150/pexels-photo-2888150.jpeg?auto=compress&cs=tinysrgb&w=1200",
+    photo: "/pexels-pavel-danilyuk-7942534.jpg",
     phone: "1234567890",
     subjects: ["Math", "Geometry"],
     classes: ["1B", "2A", "3C"],
@@ -20,8 +19,7 @@ export const teachersData = [
     teacherId: "1234567890",
     name: "Jane Doe",
     email: "jane@doe.com",
-    photo:
-      "https://images.pexels.com/photos/936126/pexels-photo-936126.jpeg?auto=compress&cs=tinysrgb&w=1200",
+    photo: "/pexels-katerina-holmes-5905753.jpg",
     phone: "1234567890",
     subjects: ["Physics", "Chemistry"],
     classes: ["5A", "4B", "3C"],
@@ -32,8 +30,7 @@ export const teachersData = [
     teacherId: "1234567890",
     name: "Mike Geller",
     email: "mike@geller.com",
-    photo:
-      "https://images.pexels.com/photos/428328/pexels-photo-428328.jpeg?auto=compress&cs=tinysrgb&w=1200",
+    photo: "/pexels-olia-danilevich-8093030.jpg",
     phone: "1234567890",
     subjects: ["Biology"],
     classes: ["5A", "4B", "3C"],
@@ -44,8 +41,7 @@ export const teachersData = [
     teacherId: "1234567890",
     name: "Jay French",
     email: "jay@gmail.com",
-    photo:
-      "https://images.pexels.com/photos/1187765/pexels-photo-1187765.jpeg?auto=compress&cs=tinysrgb&w=1200",
+    photo: "/pexels-pavel-danilyuk-7942547.jpg",
     phone: "1234567890",
     subjects: ["History"],
     classes: ["5A", "4B", "3C"],
@@ -56,8 +52,7 @@ export const teachersData = [
     teacherId: "1234567890",
     name: "Jane Smith",
     email: "jane@gmail.com",
-    photo:
-      "https://images.pexels.com/photos/1102341/pexels-photo-1102341.jpeg?auto=compress&cs=tinysrgb&w=1200",
+    photo: "/pexels-rdne-7092613.jpg",
     phone: "1234567890",
     subjects: ["Music", "History"],
     classes: ["5A", "4B", "3C"],
@@ -68,8 +63,7 @@ export const teachersData = [
     teacherId: "1234567890",
     name: "Anna Santiago",
     email: "anna@gmail.com",
-    photo:
-      "https://images.pexels.com/photos/712513/pexels-photo-712513.jpeg?auto=compress&cs=tinysrgb&w=1200",
+    photo: "/pexels-rdne-7683709.jpg",
     phone: "1234567890",
     subjects: ["Physics"],
     classes: ["5A", "4B", "3C"],
@@ -80,8 +74,7 @@ export const teachersData = [
     teacherId: "1234567890",
     name: "Allen Black",
     email: "allen@black.com",
-    photo:
-      "https://images.pexels.com/photos/1438081/pexels-photo-1438081.jpeg?auto=compress&cs=tinysrgb&w=1200",
+    photo: "/pexels-rdne-7683745.jpg",
     phone: "1234567890",
     subjects: ["English", "Spanish"],
     classes: ["5A", "4B", "3C"],
@@ -92,8 +85,7 @@ export const teachersData = [
     teacherId: "1234567890",
     name: "Ophelia Castro",
     email: "ophelia@castro.com",
-    photo:
-      "https://images.pexels.com/photos/1036623/pexels-photo-1036623.jpeg?auto=compress&cs=tinysrgb&w=1200",
+    photo: "/pexels-thirdman-5257892.jpg",
     phone: "1234567890",
     subjects: ["Math", "Geometry"],
     classes: ["5A", "4B", "3C"],
@@ -104,8 +96,7 @@ export const teachersData = [
     teacherId: "1234567890",
     name: "Derek Briggs",
     email: "derek@briggs.com",
-    photo:
-      "https://images.pexels.com/photos/842980/pexels-photo-842980.jpeg?auto=compress&cs=tinysrgb&w=1200",
+    photo: "/pexels-pixabay-256490.jpg",
     phone: "1234567890",
     subjects: ["Literature", "English"],
     classes: ["5A", "4B", "3C"],
@@ -116,8 +107,7 @@ export const teachersData = [
     teacherId: "1234567890",
     name: "John Glover",
     email: "john@glover.com",
-    photo:
-      "https://images.pexels.com/photos/1043474/pexels-photo-1043474.jpeg?auto=compress&cs=tinysrgb&w=1200",
+    photo: "/pexels-pixabay-301926.jpg",
     phone: "1234567890",
     subjects: ["Biology"],
     classes: ["5A", "4B", "3C"],
@@ -131,8 +121,7 @@ export const studentsData = [
     studentId: "1234567890",
     name: "John Doe",
     email: "john@doe.com",
-    photo:
-      "https://images.pexels.com/photos/2888150/pexels-photo-2888150.jpeg?auto=compress&cs=tinysrgb&w=1200",
+    photo: "/photo/pexels-anastasiya-gepp-654466-1462630.jpg",
     phone: "1234567890",
     grade: 5,
     class: "1B",
@@ -143,8 +132,7 @@ export const studentsData = [
     studentId: "1234567890",
     name: "Jane Doe",
     email: "jane@doe.com",
-    photo:
-      "https://images.pexels.com/photos/936126/pexels-photo-936126.jpeg?auto=compress&cs=tinysrgb&w=1200",
+    photo: "/photo/pexels-cottonbro-4769486.jpg",
     phone: "1234567890",
     grade: 5,
     class: "5A",
@@ -155,8 +143,7 @@ export const studentsData = [
     studentId: "1234567890",
     name: "Mike Geller",
     email: "mike@geller.com",
-    photo:
-      "https://images.pexels.com/photos/428328/pexels-photo-428328.jpeg?auto=compress&cs=tinysrgb&w=1200",
+    photo: "/photo/pexels-droosmo-2982449.jpg",
     phone: "1234567890",
     grade: 5,
     class: "5A",
@@ -167,8 +154,7 @@ export const studentsData = [
     studentId: "1234567890",
     name: "Jay French",
     email: "jay@gmail.com",
-    photo:
-      "https://images.pexels.com/photos/1187765/pexels-photo-1187765.jpeg?auto=compress&cs=tinysrgb&w=1200",
+    photo: "/photo/pexels-ivan-samkov-6816531.jpg",
     phone: "1234567890",
     grade: 5,
     class: "5A",
@@ -179,8 +165,7 @@ export const studentsData = [
     studentId: "1234567890",
     name: "Jane Smith",
     email: "jane@gmail.com",
-    photo:
-      "https://images.pexels.com/photos/1102341/pexels-photo-1102341.jpeg?auto=compress&cs=tinysrgb&w=1200",
+    photo: "/photo/pexels-julia-m-cameron-4143791.jpg",
     phone: "1234567890",
     grade: 5,
     class: "5A",
@@ -191,8 +176,7 @@ export const studentsData = [
     studentId: "1234567890",
     name: "Anna Santiago",
     email: "anna@gmail.com",
-    photo:
-      "https://images.pexels.com/photos/712513/pexels-photo-712513.jpeg?auto=compress&cs=tinysrgb&w=1200",
+    photo: "/photo/pexels-katerina-holmes-5905957.jpg",
     phone: "1234567890",
     grade: 5,
     class: "5A",
@@ -203,8 +187,7 @@ export const studentsData = [
     studentId: "1234567890",
     name: "Allen Black",
     email: "allen@black.com",
-    photo:
-      "https://images.pexels.com/photos/1438081/pexels-photo-1438081.jpeg?auto=compress&cs=tinysrgb&w=1200",
+    photo: "/photo/pexels-mary-taylor-5896747.jpg",
     phone: "1234567890",
     grade: 5,
     class: "5A",
@@ -215,8 +198,7 @@ export const studentsData = [
     studentId: "1234567890",
     name: "Ophelia Castro",
     email: "ophelia@castro.com",
-    photo:
-      "https://images.pexels.com/photos/1036623/pexels-photo-1036623.jpeg?auto=compress&cs=tinysrgb&w=1200",
+    photo: "/photo/pexels-pavel-danilyuk-8423015.jpg",
     phone: "1234567890",
     grade: 5,
     class: "5A",
@@ -227,8 +209,7 @@ export const studentsData = [
     studentId: "1234567890",
     name: "Derek Briggs",
     email: "derek@briggs.com",
-    photo:
-      "https://images.pexels.com/photos/842980/pexels-photo-842980.jpeg?auto=compress&cs=tinysrgb&w=1200",
+    photo: "/photo/pexels-pixabay-256417.jpg",
     phone: "1234567890",
     grade: 5,
     class: "5A",
@@ -239,8 +220,7 @@ export const studentsData = [
     studentId: "1234567890",
     name: "John Glover",
     email: "john@glover.com",
-    photo:
-      "https://images.pexels.com/photos/1043474/pexels-photo-1043474.jpeg?auto=compress&cs=tinysrgb&w=1200",
+    photo: "/photo/pexels-tima-miroshnichenko-5427995.jpg",
     phone: "1234567890",
     grade: 5,
     class: "5A",
@@ -818,6 +798,7 @@ export const eventsData = [
     date: "2025-04-01",
     startTime: "10:00",
     endTime: "11:00",
+    image: "/img/pexels-amos-getanda-244415932-12496864.jpg"
   },
   {
     id: 2,
@@ -826,6 +807,7 @@ export const eventsData = [
     date: "2025-06-01",
     startTime: "10:00",
     endTime: "11:00",
+    image: "/img/pexels-neosiam-618116.jpg"
   },
   {
     id: 3,
@@ -834,6 +816,7 @@ export const eventsData = [
     date: "2025-06-11",
     startTime: "10:00",
     endTime: "11:00",
+    image: "/img/pexels-amos-getanda-244415932-12497062.jpg"
   },
   {
     id: 4,
@@ -842,6 +825,7 @@ export const eventsData = [
     date: "2025-05-04",
     startTime: "10:00",
     endTime: "11:00",
+    image: "/img/pexels-armstrong-opulency-185550616-12448839.jpg"
   },
   {
     id: 5,
@@ -850,6 +834,7 @@ export const eventsData = [
     date: "2025-08-10",
     startTime: "10:00",
     endTime: "11:00",
+    image: "/img/pexels-cottonbro-9291043.jpg"
   },
   {
     id: 6,
@@ -858,6 +843,7 @@ export const eventsData = [
     date: "2025-03-29",
     startTime: "10:00",
     endTime: "11:00",
+    image: "/img/pexels-darkshadephotos-32750752.jpg"
   },
   {
     id: 7,
@@ -866,6 +852,7 @@ export const eventsData = [
     date: "2025-06-13",
     startTime: "10:00",
     endTime: "11:00",
+    image: "/img/pexels-gregory-vanhuyse-2150354808-31096183.jpg"
   },
   {
     id: 8,
@@ -874,6 +861,7 @@ export const eventsData = [
     date: "2025-09-12",
     startTime: "10:00",
     endTime: "11:00",
+    image: "/img/pexels-judah-18286979.jpg"
   },
   {
     id: 9,
@@ -882,6 +870,7 @@ export const eventsData = [
     date: "2025-05-09",
     startTime: "10:00",
     endTime: "11:00",
+    image: "/img/pexels-mary-taylor-5896493.jpg"
   },
   {
     id: 10,
@@ -890,6 +879,7 @@ export const eventsData = [
     date: "2025-04-15",
     startTime: "10:00",
     endTime: "11:00",
+    image: "/img/pexels-michele-ferrari-3026385-4587189.jpg"
   },
 ];
 
